@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  data-fetcher:
+    env_file:
+      - .env
+      - .private_key
+    container_name: eoracle-data-fetcher
+    ports:
+      - ${PROMETHEUS_PORT}:${PROMETHEUS_PORT}
+      - ${HEALTH_ENDPOINTS_PORT}:${HEALTH_ENDPOINTS_PORT}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    image: ${EORACLE_DATA_FETCHER_IMAGE}
+    networks:
+      - eoracle-data-fetcher
+networks:
+  eoracle-data-fetcher:
+    name: eoracle-data-fetcher
