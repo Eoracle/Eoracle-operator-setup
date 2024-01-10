@@ -22,26 +22,27 @@ This guide will walk you through the process of registering as an operator to Eo
 Clone this [repo](https://github.com/Eoracle/Eoracle-operator-setup) and execute the following commands
 ```bash
 git clone https://github.com/Eoracle/Eoracle-operator-setup.git
+cd Eoracle-operator-setup
 ```
 Edit the `Eoracle-operator-setup/data-fetcher/.env` and update the values for your setup
 
-### Encrypt your private key
-Encrypt your private key. The encrypted private key will be stored using at `ENCRYPTED_WALLET_PATH` 
+### Encrypt your private key (recommended)
+Encrypt your private key. The encrypted private key will be stored using at `ENCRYPTED_WALLET_PATH`   
+This is the recommended approach. if you encrypt a pasted private key it will never be saved as is anywhere.
 ```bash
-cd Eoracle-operator-setup
 ./run.sh encrypt <your private key>
 ```
 
-### Work with plain text private key
-If you don't want to encrypt your private key. Add it to `data-fetcher/.private_key` file
+### Work with plain text private key (discouraged)
+If you don't want to encrypt your private key. Add it to `data-fetcher/.env` file  
+This approach is highly discouraged. We recommend encrypting the private key and never saving it anywhere on any machine.  
 ```bash
 PRIVATE_KEY=<your private key>
 ```
 
-### Register to Eoracle AVS
+### Register with Eoracle AVS
 Operators need to have a minimum of 32 ETH delegated to them to opt-in into Eoracle. Executes the following command 
 ```bash
-cd Eoracle-operator-setup
 ./run.sh register
 ```
 
@@ -58,7 +59,6 @@ Sucessfully registered operator
 ### Checking status of Eoracle operator AVS
 The following command will print the status of the operator
 ```bash
-cd Eoracle-operator-setup
 ./run.sh print_status
 ```
 
@@ -70,7 +70,6 @@ Registration status for 0x3fE88CAe88Bd08C15e1df8978a2E0F9547fb4e98: REGISTERED
 Last Stake Update Block Number: 10338060 (Tue Jan 20 1970 17:30:55 GMT+0000 (Coordinated Universal Time))
 Registered with 999 shares 
 ```
-
 
 ### Deregister from Eoracle AVS
 The following command will unregister and opt-out you from the Eoracle AVS
@@ -88,8 +87,8 @@ Deregistered Operator with Coordinator at address 0xd8eA2939cE17316b7CA2F86b121E
 
 ### Run using docker
 Run the docker
-```bssh
-cd Eoracle-operator-setup/data-fetcher
+```bash
+cd data-fetcher
 docker-compose up -d
 ```
 
@@ -100,7 +99,7 @@ docker logs -f <container_id>
 ```
 
 The following example log messages confirm that your Eoracle data fetcher software is up and running
-```
+```sh
 Starting data-fetcher 
 <7> 2024-01-08T13:24:02.518Z info:      starting quotes listener
 <7> 2024-01-08T13:24:02.600Z info:      starting polygon.io/forex feed
@@ -141,11 +140,12 @@ docker compose down
 1. Upgrade the AVS software for your Eoracle data fetcher  by following the steps below:
 2. Pull the latest repo
 ```bash
-cd Eoracle-operator-setup/data-fetcher
+cd Eoracle-operator-setup
 git pull
 ```
 3. Pull the latest docker images
 ```bash
+cd data-fetcher
 docker compose pull
 ```
 4. Stop the existing services
@@ -158,9 +158,6 @@ If there are any specific instructions that needs to be followed for any upgrade
 ```bash
 docker compose up -d
 ```
-
-### Run using binary
-// TODO
 
 ## Monitoring, Metrics, Grafana dashboards
 ### Quickstart
@@ -188,20 +185,20 @@ eoracle_health_check{avs_name="EoracleDataFetvher", name="polygon.io"} 1
 
 ### Setup the monitoring stack 
 These instructions provide a quickstart guide to run the Prometheus, Grafana, and Prometheus Node exporter stack.
-Move your current working directory to the monitoring folder
+Move your current working directory to the monitoring folder (assuming you are on `Eoracle-operator-setup/data-fetcher`)
 ```bash
-cd Eoracle-operator-setup/data-fetcher/monitoring
+cd monitoring
 ```
 
 #### Prometheus
-We will use [prometheus](https://prometheus.io/download) to scrape the metrics from the EigenDA node.
+We use [prometheus](https://prometheus.io/download) to scrape the metrics from the EigenDA node.
 
 Promtheus runs as part of the monitoring stack docker compose
 * Make sure the prometheus port of Eoracle data fetcher is set correctly in the prometheus config file. 
 You can find that in Eoracle data fetcher [.env](../.env) file (`PROMETHEUS_PORT`)
 
 #### Grafana
-We will use grafana to visualize the metrics from the EigenDA node.
+We use grafana to visualize the metrics from the EigenDA node.
 
 You can use [OSS Grafana](https://grafana.com/oss/grafana/) for it or any other Dashboard provider.
 
