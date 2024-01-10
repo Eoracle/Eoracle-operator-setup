@@ -34,19 +34,19 @@ This is the recommended approach. if you encrypt a pasted private key it will ne
 ```
 
 ### Work with plain text private key (discouraged)
-If you don't want to encrypt your private key. Add it to `data-fetcher/.env` file  
+If you don't want to encrypt your private key, update it in the `data-fetcher/.env` file  
 This approach is highly discouraged. We recommend encrypting the private key and never saving it anywhere on any machine.  
 ```bash
 PRIVATE_KEY=<your private key>
 ```
 
 ### Register with Eoracle AVS
-Operators need to have a minimum of 32 ETH delegated to them to opt-in into Eoracle. Executes the following command 
+Operators need to have a minimum of 32 ETH delegated to them to opt-in to Eoracle. Execute the following command 
 ```bash
 ./run.sh register
 ```
 
-The output should looks like
+The output should look like
 ```
 Registering operator with address <your address> 
 Opted into slashing with Service Manager at address 0x9546536FdAb1903e9c263923106eA5a4A44C4159
@@ -56,28 +56,28 @@ Awaiting finalization of registration
 Successfully registered operator
 ```
 
-### Checking status of Eoracle operator AVS
+### Checking the status of Eoracle operator AVS
 The following command will print the status of the operator
 ```bash
 ./run.sh print_status
 ```
 
-The output should looks like
+The output should look like
 ```
 Using encrypted wallet
 Running getOperator to read validator status
 Registration status for 0x3fE88CAe88Bd08C15e1df8978a2E0F9547fb4e98: REGISTERED
-Last Stake Update Block Number: 10338060 (Tue Jan 20 1970 17:30:55 GMT+0000 (Coordinated Universal Time))
+Last Stake Update Block Number: 10338060 
 Registered with 999 shares 
 ```
 
 ### Deregister from Eoracle AVS
-The following command will unregister and opt-out you from the Eoracle AVS
+The following command will unregister and opt you out of the Eoracle AVS
 ```bash
 cd Eoracle-operator-setup
 ./run.sh deregister
 ```
-The output should looks like
+The output should look like
 ```
 Deregistering operator with address <your address> 
 Deregistered Operator with Coordinator at address 0xd8eA2939cE17316b7CA2F86b121EB9c7c94c39c0 with tx hash 0x0c3016d0560c717f730a2b32446af242d66b83937cc015a02f0536fa41da1988
@@ -88,11 +88,10 @@ Deregistered Operator with Coordinator at address 0xd8eA2939cE17316b7CA2F86b121E
 ### Run using docker
 Run the docker
 ```bash
-cd data-fetcher
 docker compose up -d
 ```
 
-The command will start the data fetcher container and if you do docker ps you should see an output indicating all containers have status of “Up” with ports assigned.
+The command will start the data fetcher container, and if you execute `docker ps` you should see an output indicating all containers have the " Up " status with ports assigned.
 You may view the container logs using
 ```bash
 docker logs -f <container_id>
@@ -153,19 +152,19 @@ docker compose pull
 docker compose down
 ```
 5. Start your services again
-Make sure your .private_key file still has a correct value before you restart your node.
-If there are any specific instructions that needs to be followed for any upgrade, those instructions will be given with the release notes of the specific release. Please check the latest release notes on Github and follow the instructions before starting the services again.
+If any specific instructions need to be followed for any upgrade, those instructions will be given with the specific release notes. Please check the latest [release notes](https://github.com/Eoracle/Eoracle-operator-setup/releases) on Github and follow the instructions before starting the services again.
 ```bash
 docker compose up -d
 ```
 
 ## Monitoring, Metrics, Grafana dashboards
 ### Quickstart
-We provide a quickstart guide to run the Prometheus, Grafana, and Node exporter stack.
-Checkout the README [here](monitoring/README.md) for more details. If you want to manually set this up, follow the steps below.
+We provide a quick start guide to run the Prometheus, Grafana, and Node exporter stack.
+Check out the README [here](data-fetcher/monitoring/README.md) for more details. If you want to manually set this up, follow the steps below.
 
 ### Metrics
 To check if the metrics are being emitted, run the following command:
+Replace the `PROMETHEUS_PORT` with the value of `PROMETHEUS_PORT` from the `data-fetcher/.env`  
 ```bash
 curl http://localhost:<PROMETHEUS_PORT>/metrics
 ```
@@ -184,30 +183,30 @@ eoracle_health_check{avs_name="EoracleDataFetvher", name="polygon.io"} 1
 ```
 
 ### Setup the monitoring stack 
-These instructions provide a quickstart guide to run the Prometheus, Grafana, and Prometheus Node exporter stack.
-Move your current working directory to the monitoring folder (assuming you are on `Eoracle-operator-setup/data-fetcher`)
+We use [prometheus](https://prometheus.io/download) to scrape the metrics from the Eoracle data fetcher container.
+Make sure to edit the [prometheus.yml](data-fetcher/monitoring/prometheus.yml) file, located at Eoracle-operator-setup/data-fetcher/monitoring, replacing the placeholder 'PROMETHEUS_PORT' with the actual value specified in the data fetcher [.env](data-fetcher/.env) file (PROMETHEUS_PORT)
 ```bash
-cd monitoring
+cd Eoracle-operator-setup/data-fetcher/monitoring
 ```
 
-#### Prometheus
-We use [prometheus](https://prometheus.io/download) to scrape the metrics from the EigenDA node.
-
-Promtheus runs as part of the monitoring stack docker compose
-* Make sure the prometheus port of Eoracle data fetcher is set correctly in the prometheus config file. 
-You can find that in Eoracle data fetcher [.env](../.env) file (`PROMETHEUS_PORT`)
-**Make sure to edit the prometheus.yml file, replacing the placeholder 'PROMETHEUS_PORT' with the actual value specified in the .env field.**
-
+The relevant lines are:
+```yml
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['eoracle-data-fetcher:<PROMETHEUS_PORT>']
+```
 
 ### Start the monitoring stack
-You can start all the monitoring stack, Prometheus, Grafana, and Node exporter all in once or only specific component
+You can start all the monitoring stack, Prometheus, Grafana, and Node exporter all at once or only specific component
 
 ```bash
 docker compose up -d
 ```
 
-#### Connect docker networks
-Since Eoracle data fetcher is running in a different docker network we will need to have the prometheus in the same network. To do that, run the following command
+### Connect docker networks
+Since the Eoracle data fetcher is running in a different docker network, we will need to have the Prometheus container in the same network of oracle-data-fetcher. To do that, run the following command. To do that, run the following command
 ```bash
 docker network connect eoracle-data-fetcher prometheus
 ```
@@ -219,20 +218,21 @@ docker network connect eoracle-data-fetcher prometheus
     ```
     Use the same command by prepending `sudo` in front of it.
 
-#### Grafana
-We use grafana to visualize the metrics from the EigenDA node.
+### Grafana
+We use Grafana to visualize the metrics from the Eoracle AVS.
 
 You can use [OSS Grafana](https://grafana.com/oss/grafana/) for it or any other Dashboard provider.
 
-You should be able to navigate to `http://localhost:3000` and login with `admin`/`admin`.
-You will need to add a datasource to Grafana. You can do this by navigating to `http://localhost:3000/datasources` and adding a Prometheus datasource. By default, the Prometheus server is running on `http://localhost:9090`. You can use this as the URL for the datasource.
+You should be able to navigate to `http://<ip>:3000` and log in with `admin`/`admin`.
+This container of Grafana has a Prometheus datasource setup using port 9090.  If you change the Prometheus port, you need to add a new data source or update the existing data source. 
+You can do this by navigating to `http://<ip>:3000/datasources`
 
 ##### Useful Dashboards
 We also provide a set of useful Grafana dashboards which would be useful for monitoring the Eoracle data fetcher service. You can find them [here](data-fetcher/dashboards).
-Once you have Grafana setup, feel free to import the dashboards.
+Once you have Grafana set up, feel free to import the dashboards.
 
-#### Node exporter
+### Node exporter
 Eoracle data fetcher emits Eoracle specific metrics but, it's also important to keep track of the node's health. For this, we will use [Node Exporter](https://prometheus.io/docs/guides/node-exporter/) which is a Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors.
-Install the binary or use docker to [run](https://hub.docker.com/r/prom/node-exporter) it.
+By default, it is installed and started when you start the entire monitoring stack. If you want to modify the stack, you can install the binary or use docker to [run](https://hub.docker.com/r/prom/node-exporter).
 
-In Grafana dashboard, import the [node-exporter](dashboards/node-exporter.json) to see host metrics.
+In Grafana dashboards screen, import the [node-exporter](dashboards/node-exporter.json) to see host metrics.
