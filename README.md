@@ -51,8 +51,8 @@ The output should looks like
 Registering operator with address <your address> 
 Opted into slashing with Service Manager at address 0x9546536FdAb1903e9c263923106eA5a4A44C4159
 Registered Operator with Coordinator at address 0xd8eA2939cE17316b7CA2F86b121EB9c7c94c39c0 with tx hash 0x28b4b463762d917c514b0e0a5b6b8e65187a4ea43f2ab146672ba22d6b7aaa81
-Awaiting finialization of registration
-Awaiting finialization of registration
+Awaiting finalization of registration
+Awaiting finalization of registration
 Sucessfully registered operator
 ```
 
