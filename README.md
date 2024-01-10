@@ -89,7 +89,7 @@ Deregistered Operator with Coordinator at address 0xd8eA2939cE17316b7CA2F86b121E
 Run the docker
 ```bash
 cd data-fetcher
-docker-compose up -d
+docker compose up -d
 ```
 
 The command will start the data fetcher container and if you do docker ps you should see an output indicating all containers have status of “Up” with ports assigned.
@@ -196,30 +196,14 @@ We use [prometheus](https://prometheus.io/download) to scrape the metrics from t
 Promtheus runs as part of the monitoring stack docker compose
 * Make sure the prometheus port of Eoracle data fetcher is set correctly in the prometheus config file. 
 You can find that in Eoracle data fetcher [.env](../.env) file (`PROMETHEUS_PORT`)
+**Make sure to edit the prometheus.yml file, replacing the placeholder 'PROMETHEUS_PORT' with the actual value specified in the .env field.**
 
-#### Grafana
-We use grafana to visualize the metrics from the EigenDA node.
-
-You can use [OSS Grafana](https://grafana.com/oss/grafana/) for it or any other Dashboard provider.
-
-You should be able to navigate to `http://localhost:3000` and login with `admin`/`admin`.
-You will need to add a datasource to Grafana. You can do this by navigating to `http://localhost:3000/datasources` and adding a Prometheus datasource. By default, the Prometheus server is running on `http://localhost:9090`. You can use this as the URL for the datasource.
-
-##### Useful Dashboards
-We also provide a set of useful Grafana dashboards which would be useful for monitoring the Eoracle data fetcher service. You can find them [here](dashboards).
-Once you have Grafana setup, feel free to import the dashboards.
-
-#### Node exporter
-Eoracle data fetcher emits Eoracle specific metrics but, it's also important to keep track of the node's health. For this, we will use [Node Exporter](https://prometheus.io/docs/guides/node-exporter/) which is a Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors.
-Install the binary or use docker to [run](https://hub.docker.com/r/prom/node-exporter) it.
-
-In Grafana dashboard, import the [node-exporter](dashboards/node-exporter.json) to see host metrics.
 
 ### Start the monitoring stack
 You can start all the monitoring stack, Prometheus, Grafana, and Node exporter all in once or only specific component
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 #### Connect docker networks
@@ -234,3 +218,21 @@ docker network connect eoracle-data-fetcher prometheus
     permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json": dial unix /var/run/docker.sock: connect: permission denied
     ```
     Use the same command by prepending `sudo` in front of it.
+
+#### Grafana
+We use grafana to visualize the metrics from the EigenDA node.
+
+You can use [OSS Grafana](https://grafana.com/oss/grafana/) for it or any other Dashboard provider.
+
+You should be able to navigate to `http://localhost:3000` and login with `admin`/`admin`.
+You will need to add a datasource to Grafana. You can do this by navigating to `http://localhost:3000/datasources` and adding a Prometheus datasource. By default, the Prometheus server is running on `http://localhost:9090`. You can use this as the URL for the datasource.
+
+##### Useful Dashboards
+We also provide a set of useful Grafana dashboards which would be useful for monitoring the Eoracle data fetcher service. You can find them [here](data-fetcher/dashboards).
+Once you have Grafana setup, feel free to import the dashboards.
+
+#### Node exporter
+Eoracle data fetcher emits Eoracle specific metrics but, it's also important to keep track of the node's health. For this, we will use [Node Exporter](https://prometheus.io/docs/guides/node-exporter/) which is a Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors.
+Install the binary or use docker to [run](https://hub.docker.com/r/prom/node-exporter) it.
+
+In Grafana dashboard, import the [node-exporter](dashboards/node-exporter.json) to see host metrics.
