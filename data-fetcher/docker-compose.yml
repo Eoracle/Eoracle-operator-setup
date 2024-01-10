@@ -16,6 +16,7 @@ services:
         max-file: "10"
     image: ${EORACLE_DATA_FETCHER_IMAGE}
     platform: linux/amd64
+    restart: unless-stopped
     networks:
       - eoracle-data-fetcher
 networks:
