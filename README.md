@@ -92,6 +92,7 @@ Deregistered Operator with Coordinator at address 0xd8eA2939cE17316b7CA2F86b121E
 ### Run using docker
 Run the docker
 ```bash
+cd data-fetcher
 docker compose up -d
 ```
 
