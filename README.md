@@ -87,7 +87,7 @@ Deregistering operator with address <your address>
 Deregistered Operator with Coordinator at address 0xd8eA2939cE17316b7CA2F86b121EB9c7c94c39c0 with tx hash 0x0c3016d0560c717f730a2b32446af242d66b83937cc015a02f0536fa41da1988
 ```
 
-## Running Eoracle AVS Data validator
+## Running Eoracle AVS data validator
 
 ### Run using docker
 Run the docker
