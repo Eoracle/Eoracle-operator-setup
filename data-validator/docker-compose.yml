@@ -1,9 +1,9 @@
 version: '3.8'
 services:
-  data-fetcher:
+  data-validator:
     env_file:
       - .env
-    container_name: eoracle-data-fetcher
+    container_name: eoracle-data-validator
     ports:
       - ${PROMETHEUS_PORT}:${PROMETHEUS_PORT}
       - ${HEALTH_ENDPOINTS_PORT}:${HEALTH_ENDPOINTS_PORT}
@@ -14,11 +14,11 @@ services:
       options:
         max-size: "100m"
         max-file: "10"
-    image: ${EORACLE_DATA_FETCHER_IMAGE}
+    image: ${EORACLE_DATA_VALIDATOR_IMAGE}
     platform: linux/amd64
     restart: unless-stopped
     networks:
-      - eoracle-data-fetcher
+      - eoracle-data-validator
 networks:
-  eoracle-data-fetcher:
-    name: eoracle-data-fetcher
+  eoracle-data-validator:
+    name: eoracle-data-validator

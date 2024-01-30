@@ -1,6 +1,6 @@
 #!/bin/bash
 # process the arg 
-cd data-fetcher
+cd data-validator
 source .env 
 cwd=$(pwd)
 
