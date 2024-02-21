@@ -148,7 +148,7 @@ docker compose down
 cd Eoracle-operator-setup
 git pull
 ```
-3. Merge .env changes
+3. Merge .env changes  
 Go over .example_env and merge new fields that do not appear in your local .env file
 
 4. Pull the latest docker images
