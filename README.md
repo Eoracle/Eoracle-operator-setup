@@ -25,7 +25,6 @@ git clone https://github.com/Eoracle/Eoracle-operator-setup.git
 cd Eoracle-operator-setup
 cp data-validator/.example_env data-validator/.env
 ```
-Copy `Eoracle-operator-setup/data-validator/.example_env into Eoracle-operator-setup/data-validator/.env`.  
 Edit the `Eoracle-operator-setup/data-validator/.env` and update the values for your setup
 
 ### Encrypt your private key (recommended)
