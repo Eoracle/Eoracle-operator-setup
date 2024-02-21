@@ -25,7 +25,7 @@ git clone https://github.com/Eoracle/Eoracle-operator-setup.git
 cd Eoracle-operator-setup
 cp data-validator/.example_env data-validator/.env
 ```
-Edit the `Eoracle-operator-setup/data-validator/.env` and update the values for your setup
+Edit the `data-validator/.env` and update the values for your setup
 
 ### Encrypt your private key (recommended)
 Encrypt your private key. The encrypted private key will be stored using at `ENCRYPTED_WALLET_PATH`   
@@ -142,25 +142,25 @@ docker compose down
 ```
 
 ### Upgrade Eoracle data validator
-1. Upgrade the AVS software for your Eoracle data validator  by following the steps below:
-2. Pull the latest repo
+Upgrade the AVS software for your Eoracle data validator by following the steps below:  
+1. Pull the latest repo
 ```bash
 cd Eoracle-operator-setup
 git pull
 ```
-3. Merge .env changes  
+2. Merge .env changes  
 Go over .example_env and merge new fields that do not appear in your local .env file
 
-4. Pull the latest docker images
+3. Pull the latest docker images
 ```bash
 cd data-validator
 docker compose pull
 ```
-5. Stop the existing services
+4. Stop the existing services
 ```bash
 docker compose down
 ```
-6. Start your services again
+5. Start your services again
 If any specific instructions need to be followed for any upgrade, those instructions will be given with the specific release notes. Please check the latest [release notes](https://github.com/Eoracle/Eoracle-operator-setup/releases) on Github and follow the instructions before starting the services again.
 ```bash
 docker compose up -d
