@@ -23,7 +23,9 @@ Clone this [repo](https://github.com/Eoracle/Eoracle-operator-setup) and execute
 ```bash
 git clone https://github.com/Eoracle/Eoracle-operator-setup.git
 cd Eoracle-operator-setup
+cp data-validator/.example_env data-validator/.env
 ```
+Copy `Eoracle-operator-setup/data-validator/.example_env into Eoracle-operator-setup/data-validator/.env`.  
 Edit the `Eoracle-operator-setup/data-validator/.env` and update the values for your setup
 
 ### Encrypt your private key (recommended)
@@ -147,16 +149,19 @@ docker compose down
 cd Eoracle-operator-setup
 git pull
 ```
-3. Pull the latest docker images
+3. Merge .env changes
+Go over .example_env and merge new fields that do not appear in your local .env file
+
+4. Pull the latest docker images
 ```bash
 cd data-validator
 docker compose pull
 ```
-4. Stop the existing services
+5. Stop the existing services
 ```bash
 docker compose down
 ```
-5. Start your services again
+6. Start your services again
 If any specific instructions need to be followed for any upgrade, those instructions will be given with the specific release notes. Please check the latest [release notes](https://github.com/Eoracle/Eoracle-operator-setup/releases) on Github and follow the instructions before starting the services again.
 ```bash
 docker compose up -d
