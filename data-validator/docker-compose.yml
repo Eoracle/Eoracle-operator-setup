@@ -5,16 +5,16 @@ services:
       - .env
     container_name: eoracle-data-validator
     ports:
-      - ${PROMETHEUS_PORT}:${PROMETHEUS_PORT}
-      - ${HEALTH_ENDPOINTS_PORT}:${HEALTH_ENDPOINTS_PORT}
+      - ${EO_PROMETHEUS_PORT}:${EO_PROMETHEUS_PORT}
+      - ${EO_HEALTH_ENDPOINTS_PORT}:${EO_HEALTH_ENDPOINTS_PORT}
     volumes:
-      - ./${ENCRYPTED_WALLET_PATH}:/app/${ENCRYPTED_WALLET_PATH}
+      - ./${EO_KEYSTORE_PATH}:/app/${EO_KEYSTORE_PATH}:rw
     logging:
       driver: "json-file"
       options:
         max-size: "100m"
         max-file: "10"
-    image: ${EORACLE_DATA_VALIDATOR_IMAGE}
+    image: ${EO_DATA_VALIDATOR_IMAGE}
     platform: linux/amd64
     restart: unless-stopped
     networks:
