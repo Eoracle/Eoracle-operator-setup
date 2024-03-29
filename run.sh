@@ -16,8 +16,8 @@ if [ "$1" == "encrypt" ]; then
         echo "$EO_KEYSTORE_PATH is not set in .env"
         exit 1
     fi
-    echo "ECDSA_PRIVATE_KEY=$2" > .private_key
-    echo "BLS_PRIVATE_KEY=$3" >> .private_key
+    echo "EO_ECDSA_PRIVATE_KEY=$2" > .private_key
+    echo "EO_BLS_PRIVATE_KEY=$3" >> .private_key
     docker run --env-file .env --env-file .private_key --platform linux/amd64 ${private_path} ${EO_OPERATOR_CLI_IMAGE} ${1}
     rm .private_key > /dev/null 2>&1
 elif [ "$1" == "register" ] || [ "$1" == "deregister" ] || [ "$1" == "print-status" ] || [ "$1" == "decrypt" ] || [ "$1" == "generate-bls-key" ]; then
