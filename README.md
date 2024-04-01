@@ -32,10 +32,10 @@ cp data-validator/.example_env data-validator/.env
 Copy `Eoracle-operator-setup/data-validator/.example_env` into `Eoracle-operator-setup/data-validator/.env`.  
 Edit the `Eoracle-operator-setup/data-validator/.env` and update the values for your setup
 
-### Generate a BLS pair (discouraged)
+### Generate a BLS pair (recommended)
 The register process requires two sets of private keys: an ecdsa private key and a bls private key,  
-We recommend using the same BLS private key that you use when registering to EigenLayer. 
-If you want to create a new BLS pair, you can do it and generate and new BLS pair that will be dedicated to Eoracle
+We recommend creating a new BLS pair for security reasons.
+If you want to create a new BLS pair, you can generate a new BLS pair that will be dedicated to Eoracle
 ```bash
 ./run.sh generate-bls-key
 ```
