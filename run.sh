@@ -13,7 +13,7 @@ fi
 
 if [ "$1" == "encrypt" ]; then
     if [ -z "$EO_KEYSTORE_PATH" ]; then
-        echo "$EO_KEYSTORE_PATH is not set in .env"
+        echo "EO_KEYSTORE_PATH is not set in .env"
         exit 1
     fi
     echo "EO_ECDSA_PRIVATE_KEY=$2" > .private_key
