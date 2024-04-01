@@ -3,6 +3,10 @@ This guide will walk you through the process of registering as an operator to Eo
 
 ## Prerequisites
 1. **Registered Eigenlayer Operator Account:** Ensure you have a fully registered Eigenlayer operator account. If you don't have one, follow the steps in the [Eigenlayer User Guide](https://docs.eigenlayer.xyz/restaking-guides/restaking-user-guide) to create and fund your account.
+2. **Activate as eoracle operator:** Ensure eoracle activated your account. In order to check your current status you can run the following (1 is activated, 0 is not). In case of issues please contact support@eoracle.io
+```bash
+cast call 0x6B0BE2aaD42612803c9Fc389A3806EF21E8cbDb6 "isValidatorActive(address validator)" <your_operator_address> -r https://rpc.testnet.eoracle.network | cast 2d
+```
 
 ## Software/Hardware Requirement 
 * Operating System: linux amd x64
@@ -28,10 +32,10 @@ cp data-validator/.example_env data-validator/.env
 Copy `Eoracle-operator-setup/data-validator/.example_env` into `Eoracle-operator-setup/data-validator/.env`.  
 Edit the `Eoracle-operator-setup/data-validator/.env` and update the values for your setup
 
-### Generate a BLS pair (discouraged)
+### Generate a BLS pair (recommended)
 The register process requires two sets of private keys: an ecdsa private key and a bls private key,  
-We recommend using the same BLS private key that you use when registering to EigenLayer. 
-If you want to create a new BLS pair, you can do it and generate and new BLS pair that will be dedicated to Eoracle
+We recommend creating a new BLS pair for security reasons.
+If you want to create a new BLS pair, you can generate a new BLS pair that will be dedicated to Eoracle
 ```bash
 ./run.sh generate-bls-key
 ```
