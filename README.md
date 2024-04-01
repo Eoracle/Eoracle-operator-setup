@@ -3,6 +3,10 @@ This guide will walk you through the process of registering as an operator to Eo
 
 ## Prerequisites
 1. **Registered Eigenlayer Operator Account:** Ensure you have a fully registered Eigenlayer operator account. If you don't have one, follow the steps in the [Eigenlayer User Guide](https://docs.eigenlayer.xyz/restaking-guides/restaking-user-guide) to create and fund your account.
+2. **Activate as eoracle operator:** Ensure eoracle activated your account. In order to check your current status you can run the following (1 is activated, 0 is not). In case of issues please contact support@eoracle.io
+```bash
+cast call 0x6B0BE2aaD42612803c9Fc389A3806EF21E8cbDb6 "isValidatorActive(address validator)" <your_operator_address> -r https://rpc.testnet.eoracle.network | cast 2d
+```
 
 ## Software/Hardware Requirement 
 * Operating System: linux amd x64
@@ -25,20 +29,30 @@ git clone https://github.com/Eoracle/Eoracle-operator-setup.git
 cd Eoracle-operator-setup
 cp data-validator/.example_env data-validator/.env
 ```
-Edit the `data-validator/.env` and update the values for your setup
+Copy `Eoracle-operator-setup/data-validator/.example_env` into `Eoracle-operator-setup/data-validator/.env`.  
+Edit the `Eoracle-operator-setup/data-validator/.env` and update the values for your setup
 
-### Encrypt your private key (recommended)
-Encrypt your private key. The encrypted private key will be stored using at `ENCRYPTED_WALLET_PATH`   
-This is the recommended approach. if you encrypt a pasted private key it will never be saved as is anywhere.
+### Generate a BLS pair (recommended)
+The register process requires two sets of private keys: an ecdsa private key and a bls private key,  
+We recommend creating a new BLS pair for security reasons.
+If you want to create a new BLS pair, you can generate a new BLS pair that will be dedicated to Eoracle
 ```bash
-./run.sh encrypt <your private key>
+./run.sh generate-bls-key
 ```
 
-### Work with plain text private key (discouraged)
-If you don't want to encrypt your private key, update it in the `data-validator/.env` file  
-This approach is highly discouraged. We recommend encrypting the private key and never saving it anywhere on any machine.  
+### Encrypt your private keys (recommended)
+Encrypt your private keys. The encrypted private keys will be stored using the `EO_KEYSTORE_PATH` field.
+This is the recommended approach. if you encrypt a pasted private key it will never be saved as is anywhere.
 ```bash
-PRIVATE_KEY=<your private key>
+./run.sh encrypt <your ecdsa private key> <your bls private key>
+```
+
+### Work with plain text private keys (discouraged)
+If you don't want to encrypt your private keys, update them in the `data-validator/.env` file  
+This approach is highly discouraged. We recommend encrypting the private keys and never saving them anywhere on any machine.  
+```bash
+EO_BLS_PRIVATE_KEY=<your ecdsa private key>
+EO_ECDSA_PRIVATE_KEY=<your bls private key>
 ```
 
 ### Register with Eoracle AVS
@@ -64,7 +78,7 @@ Successfully registered operator
 ### Checking the status of Eoracle operator AVS
 The following command will print the status of the operator
 ```bash
-./run.sh print_status
+./run.sh print-status
 ```
 
 The output should look like
@@ -142,25 +156,25 @@ docker compose down
 ```
 
 ### Upgrade Eoracle data validator
-Upgrade the AVS software for your Eoracle data validator by following the steps below:  
-1. Pull the latest repo
+1. Upgrade the AVS software for your Eoracle data validator  by following the steps below:
+2. Pull the latest repo
 ```bash
 cd Eoracle-operator-setup
 git pull
 ```
-2. Merge .env changes  
+3. Merge .env changes
 Go over .example_env and merge new fields that do not appear in your local .env file
 
-3. Pull the latest docker images
+4. Pull the latest docker images
 ```bash
 cd data-validator
 docker compose pull
 ```
-4. Stop the existing services
+5. Stop the existing services
 ```bash
 docker compose down
 ```
-5. Start your services again
+6. Start your services again
 If any specific instructions need to be followed for any upgrade, those instructions will be given with the specific release notes. Please check the latest [release notes](https://github.com/Eoracle/Eoracle-operator-setup/releases) on Github and follow the instructions before starting the services again.
 ```bash
 docker compose up -d
@@ -173,9 +187,9 @@ Check out the README [here](data-validator/monitoring/README.md) for more detail
 
 ### Metrics
 To check if the metrics are being emitted, run the following command:
-Replace the `PROMETHEUS_PORT` with the value of `PROMETHEUS_PORT` from the `data-validator/.env`  
+Replace the `EO_PROMETHEUS_PORT` with the value of `EO_PROMETHEUS_PORT` from the `data-validator/.env`  
 ```bash
-curl http://localhost:<PROMETHEUS_PORT>/metrics
+curl http://localhost:<EO_PROMETHEUS_PORT>/metrics
 ```
 
 You should see something like
@@ -204,7 +218,7 @@ scrape_configs:
   - job_name: 'prometheus'
     scrape_interval: 1m
     static_configs:
-      - targets: ['eoracle-data-validator:<PROMETHEUS_PORT>']
+      - targets: ['eoracle-data-validator:<EO_PROMETHEUS_PORT>']
 ```
 
 ### Start the monitoring stack
