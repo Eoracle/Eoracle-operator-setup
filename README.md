@@ -5,7 +5,7 @@ This guide will walk you through the process of registering as an operator to Eo
 1. **Registered Eigenlayer Operator Account:** Ensure you have a fully registered Eigenlayer operator account. If you don't have one, follow the steps in the [Eigenlayer User Guide](https://docs.eigenlayer.xyz/restaking-guides/restaking-user-guide) to create and fund your account.
 2. **Activate as eoracle operator:** Ensure eoracle activated your account. In order to check your current status you can run the following (1 is activated, 0 is not). In case of issues please contact support@eoracle.io
 ```bash
-cast call 0x6B0BE2aaD42612803c9Fc389A3806EF21E8cbDb6 "isValidatorActive(address validator)" <your_operator_address> -r https://rpc.testnet.eoracle.network | cast 2d
+cast call <EOConfig> "isValidatorActive(address validator)" <your_operator_address> -r https://rpc.eoracle.network | cast 2d
 ```
 
 ## Software/Hardware Requirement 
@@ -75,6 +75,14 @@ Awaiting finalization of registration
 Successfully registered operator
 ```
 
+### Troubleshooting the register command.
+salt already spent - if you get the following error:
+```
+Failed to create RegisterOperator transaction execution reverted: AVSDirectory.registerOperatorToAVS: salt already spent
+```
+Please add EO_SALT=<salt_in_hex> field to your .env file and retry runnning register.  
+(*) the EO_SALT should be in the following format EO_SALT=0x04 (even length hex number, and could be any number but must be even length)
+
 ### Checking the status of Eoracle operator AVS
 The following command will print the status of the operator
 ```bash
@@ -83,12 +91,11 @@ The following command will print the status of the operator
 
 The output should look like
 ```
-Using encrypted wallet
-Running getOperator to read validator status
-Registration status for 0x3fE88CAe88Bd08C15e1df8978a2E0F9547fb4e98: REGISTERED
-Last Stake Update Block Number: 10338060 
-Registered with 999 shares 
+docker-entrypoint-oprcli.sh: Starting oprcli print-status 
+{"level":"info","ts":1712824061.311895,"caller":"logging/zap_logger.go:49","msg":"Operator Status","status":"REGISTERED"}
+{"level":"info","ts":1712824061.3466434,"caller":"logging/zap_logger.go:49","msg":"Operator stake update","stake":"1000","block number":1253026}
 ```
+
 
 ### Deregister from Eoracle AVS
 The following command will unregister and opt you out of the Eoracle AVS
