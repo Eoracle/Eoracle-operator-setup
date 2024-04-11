@@ -79,6 +79,7 @@ alias ecdsa address  <your_alias_address> saved
 
 This generates an alias ECDSA keypair, encrypts and stores it in the keystore. Importing and plaintext is also enabled but discourged. 
 
+
 ```
 ❯ ls -la /path/to/keystore.keystore
 -rw-r--r--@ 1 <usr>  staff  554 Apr 11 20:18 blsEncryptedWallet.json
@@ -88,16 +89,18 @@ This generates an alias ECDSA keypair, encrypts and stores it in the keystore. I
 
 Note: Access to our client source code is currently restricted, however, interested parties may contact support@eoracle.io to review the client for security reasons. 
 
+
 ### Troubleshooting the register command.
 salt already spent - if you get the following error:
 ```
 Failed to create RegisterOperator transaction execution reverted: AVSDirectory.registerOperatorToAVS: salt already spent
 ```
 Please add EO_SALT=<salt_in_hex> field to your .env file and retry runnning register.  
-(*) the EO_SALT should be in the following format EO_SALT=0x04 (must be an even length hex number)
 
+(*) the EO_SALT should be in the following format EO_SALT=0x04 (even length hex number, and could be any number but must be even length)
 
-### Checking the status of eoracle operator AVS
+### Checking the status of Eoracle operator AVS
+
 The following command will print the status of the operator
 ```bash
 ./run.sh print-status
@@ -113,6 +116,7 @@ docker-entrypoint-oprcli.sh: Starting oprcli print-status
 
 ### Deregister from eoracle AVS
 The following command will unregister and opt you out of the eoracle AVS
+
 ```bash
 cd Eoracle-operator-setup
 ./run.sh deregister
