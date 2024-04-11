@@ -1,11 +1,11 @@
-# Eoracle Operator Setup
-This guide will walk you through the process of registering as an operator to Eoracle AVS and running the Eoracle software.
+# eoracle Operator Setup
+This guide will walk you through the process of registering as an operator to eoracle AVS and running the eoracle software.
 
 ## Prerequisites
 1. **Registered Eigenlayer Operator Account:** Ensure you have a fully registered Eigenlayer operator account. If you don't have one, follow the steps in the [Eigenlayer User Guide](https://docs.eigenlayer.xyz/restaking-guides/restaking-user-guide) to create and fund your account.
-2. **Activate as eoracle operator:** Ensure eoracle activated your account. In order to check your current status you can run the following (1 is activated, 0 is not). In case of issues please contact support@eoracle.io
+2. **Activate as eoracle operator:** Ensure eoracle activated your account. In order to check your current status you can run the following through [foundry](https://book.getfoundry.sh/getting-started/installation) (1 is activated, 0 is not). In case of issues please contact support@eoracle.io
 ```bash
-cast call <EOConfig> "isValidatorActive(address validator)" <your_operator_address> -r https://rpc.eoracle.network | cast 2d
+cast call <EOConfig_Address> "isValidatorActive(address validator)" <your_operator_address> -r https://rpc.eoracle.network | cast 2d
 ```
 
 ## Software/Hardware Requirement 
@@ -22,7 +22,7 @@ cast call <EOConfig> "isValidatorActive(address validator)" <your_operator_addre
   * 9090 Prometheus 
 
 ## Operator Setup
-### ​Prepare Local Eoracle data validator files
+### ​Prepare Local eoracle data validator files
 Clone this [repo](https://github.com/Eoracle/Eoracle-operator-setup) and execute the following commands
 ```bash
 git clone https://github.com/Eoracle/Eoracle-operator-setup.git
@@ -35,7 +35,7 @@ Edit the `Eoracle-operator-setup/data-validator/.env` and update the values for 
 ### Generate a BLS pair (recommended)
 The register process requires two sets of private keys: an ecdsa private key and a bls private key,  
 We recommend creating a new BLS pair for security reasons.
-If you want to create a new BLS pair, you can generate a new BLS pair that will be dedicated to Eoracle
+If you want to create a new BLS pair, you can generate a new BLS pair that will be dedicated to eoracle
 ```bash
 ./run.sh generate-bls-key
 ```
@@ -55,25 +55,38 @@ EO_BLS_PRIVATE_KEY=<your ecdsa private key>
 EO_ECDSA_PRIVATE_KEY=<your bls private key>
 ```
 
-### Register with Eoracle AVS
-Operators need to have a minimum of 32 ETH delegated to them to opt-in to Eoracle. Execute the following command 
+### Register with eoracle AVS
+Operators need to have a minimum of 32 ETH delegated to them to opt-in to eoracle. Execute the following command 
 ```bash
 ./run.sh register
 ```
 
 The output should look like
 ```
-Registering operator with address <your address> 
-Opted into slashing with Service Manager at address 0x9546536FdAb1903e9c263923106eA5a4A44C4159
-Registered Operator with Coordinator at address 0xd8eA2939cE17316b7CA2F86b121EB9c7c94c39c0 with tx hash 0x28b4b463762d917c514b0e0a5b6b8e65187a4ea43f2ab146672ba22d6b7aaa81
-Awaiting finalization of registration
-Awaiting finalization of registration
-.
-.
-.
-Awaiting finalization of registration
-Successfully registered operator
+{"level":"info","ts":1712853423.629971,"caller":"logging/zap_logger.go:49","msg":"succesfully registered to eoracle AVS","address":"<your_address>","tx hash":"<your_tx_hash>"}
 ```
+### Declare an eoracle alias 
+Operators must declare another ECDSA address to use within the eoracle client. This isolates the Ethereum Eigenlayer operator private key from eoracle operations, protecting access to Ethereum assets. 
+```
+./run.sh eochain-set-alias
+```
+The output should look like 
+
+```
+alias ecdsa address  <your_alias_address> saved
+{"level":"info","ts":1712869774.0857012,"caller":"logging/zap_logger.go:49","msg":"succesfully set the alias in the eochain","Ethereum address":"<your_ethereum_address>","eochain address":"<your_alias_address>","tx hash":"<tx_hash>"}
+```
+
+This generates an alias ECDSA keypair, encrypts and stores it in the keystore. Importing and plaintext is also enabled but discourged. 
+
+```
+❯ ls -la /path/to/keystore.keystore
+-rw-r--r--@ 1 <usr>  staff  554 Apr 11 20:18 blsEncryptedWallet.json
+-rw-r--r--  1 <usr>  staff  491 Apr 12 00:06 ecdsaAliasedEncryptedWallet.json
+-rw-r--r--@ 1 <usr>  staff  491 Apr 11 20:18 ecdsaEncryptedWallet.json
+```
+
+Note: Access to our client source code is currently restricted, however, interested parties may contact support@eoracle.io to review the client for security reasons. 
 
 ### Troubleshooting the register command.
 salt already spent - if you get the following error:
@@ -81,9 +94,10 @@ salt already spent - if you get the following error:
 Failed to create RegisterOperator transaction execution reverted: AVSDirectory.registerOperatorToAVS: salt already spent
 ```
 Please add EO_SALT=<salt_in_hex> field to your .env file and retry runnning register.  
-(*) the EO_SALT should be in the following format EO_SALT=0x04 (even length hex number, and could be any number but must be even length)
+(*) the EO_SALT should be in the following format EO_SALT=0x04 (must be an even length hex number)
 
-### Checking the status of Eoracle operator AVS
+
+### Checking the status of eoracle operator AVS
 The following command will print the status of the operator
 ```bash
 ./run.sh print-status
@@ -93,12 +107,12 @@ The output should look like
 ```
 docker-entrypoint-oprcli.sh: Starting oprcli print-status 
 {"level":"info","ts":1712824061.311895,"caller":"logging/zap_logger.go:49","msg":"Operator Status","status":"REGISTERED"}
-{"level":"info","ts":1712824061.3466434,"caller":"logging/zap_logger.go:49","msg":"Operator stake update","stake":"1000","block number":1253026}
+{"level":"info","ts":1712824061.3466434,"caller":"logging/zap_logger.go:49","msg":"Operator stake update","stake":"<your_stake>","block number":1253026}
 ```
 
 
-### Deregister from Eoracle AVS
-The following command will unregister and opt you out of the Eoracle AVS
+### Deregister from eoracle AVS
+The following command will unregister and opt you out of the eoracle AVS
 ```bash
 cd Eoracle-operator-setup
 ./run.sh deregister
@@ -109,7 +123,7 @@ Deregistering operator with address <your address>
 Deregistered Operator with Coordinator at address 0xd8eA2939cE17316b7CA2F86b121EB9c7c94c39c0 with tx hash 0x0c3016d0560c717f730a2b32446af242d66b83937cc015a02f0536fa41da1988
 ```
 
-## Running Eoracle AVS data validator
+## Running eoracle AVS data validator
 
 ### Run using docker
 Run the docker
@@ -124,7 +138,7 @@ You may view the container logs using
 docker logs -f <container_id>
 ```
 
-The following example log messages confirm that your Eoracle data validator software is up and running
+The following example log messages confirm that your eoracle data validator software is up and running
 ```sh
 Starting data-validator 
 <7> 2024-01-08T13:24:02.518Z info:      starting quotes listener
@@ -155,15 +169,15 @@ Starting data-validator
 <7> 2024-01-08T13:24:12.716Z info:      polygon.io/forex received ping
 ```
 
-### Stop Eoracle data validator
+### Stop eoracle data validator
 To bring the containers down, run the following command
 ```bash
 cd Eoracle-operator-setup/data-validator
 docker compose down
 ```
 
-### Upgrade Eoracle data validator
-1. Upgrade the AVS software for your Eoracle data validator  by following the steps below:
+### Upgrade eoracle data validator
+1. Upgrade the AVS software for your eoracle data validator  by following the steps below:
 2. Pull the latest repo
 ```bash
 cd Eoracle-operator-setup
@@ -213,7 +227,7 @@ eoracle_health_check{avs_name="EoracleDataValidator", name="polygon.io"} 1
 ```
 
 ### Setup the monitoring stack 
-We use [prometheus](https://prometheus.io/download) to scrape the metrics from the Eoracle data validator container.
+We use [prometheus](https://prometheus.io/download) to scrape the metrics from the eoracle data validator container.
 Make sure to edit the [prometheus.yml](data-validator/monitoring/prometheus.yml) file, located at Eoracle-operator-setup/data-validator/monitoring, replacing the placeholder 'PROMETHEUS_PORT' with the actual value specified in the data validator [.env](data-validator/.env) file (PROMETHEUS_PORT)
 ```bash
 cd Eoracle-operator-setup/data-validator/monitoring
@@ -236,7 +250,7 @@ docker compose up -d
 ```
 
 ### Connect docker networks
-Since the Eoracle data validator is running in a different docker network, we will need to have the Prometheus container in the same network of oracle-data-validator. To do that, run the following command. To do that, run the following command
+Since the eoracle data validator is running in a different docker network, we will need to have the Prometheus container in the same network of oracle-data-validator. To do that, run the following command. To do that, run the following command
 ```bash
 docker network connect eoracle-data-validator prometheus
 ```
@@ -249,7 +263,7 @@ docker network connect eoracle-data-validator prometheus
     Use the same command by prepending `sudo` in front of it.
 
 ### Grafana
-We use Grafana to visualize the metrics from the Eoracle AVS.
+We use Grafana to visualize the metrics from the eoracle AVS.
 
 You can use [OSS Grafana](https://grafana.com/oss/grafana/) for it or any other Dashboard provider.
 
@@ -258,11 +272,11 @@ This container of Grafana has a Prometheus datasource setup using port 9090.  If
 You can do this by navigating to `http://<ip>:3000/datasources`
 
 ##### Useful Dashboards
-We also provide a set of useful Grafana dashboards which would be useful for monitoring the Eoracle data validator service. You can find them [here](data-validator/dashboards).
+We also provide a set of useful Grafana dashboards which would be useful for monitoring the eoracle data validator service. You can find them [here](data-validator/dashboards).
 Once you have Grafana set up, feel free to import the dashboards.
 
 ### Node exporter
-Eoracle data validator emits Eoracle specific metrics but, it's also important to keep track of the node's health. For this, we will use [Node Exporter](https://prometheus.io/docs/guides/node-exporter/) which is a Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors.
+eoracle data validator emits eoracle specific metrics but, it's also important to keep track of the node's health. For this, we will use [Node Exporter](https://prometheus.io/docs/guides/node-exporter/) which is a Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, written in Go with pluggable metric collectors.
 By default, it is installed and started when you start the entire monitoring stack. If you want to modify the stack, you can install the binary or use docker to [run](https://hub.docker.com/r/prom/node-exporter).
 
 In Grafana dashboards screen, import the [node-exporter](dashboards/node-exporter.json) to see host metrics.
