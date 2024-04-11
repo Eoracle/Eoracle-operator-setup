@@ -144,33 +144,22 @@ docker logs -f <container_id>
 
 The following example log messages confirm that your eoracle data validator software is up and running
 ```sh
-Starting data-validator 
-<7> 2024-01-08T13:24:02.518Z info:      starting quotes listener
-<7> 2024-01-08T13:24:02.600Z info:      starting polygon.io/forex feed
-<7> 2024-01-08T13:24:02.602Z info:      starting polygon.io/crypto feed
-<7> 2024-01-08T13:24:02.602Z info:      defaulting to process.env.PRIVATE_KEY for wallet
-<7> 2024-01-08T13:24:02.656Z info:      Health endpoints are available through port: 10003
-<7> 2024-01-08T13:24:02.657Z info:      Prometheus metrics are available through port: 10004
-<7> 2024-01-08T13:24:02.714Z info:      starting quotes reporter
-(node:7) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
-(Use `data-validator --trace-warnings ...` to show where the warning was created)
-<7> 2024-01-08T13:24:02.886Z info:      polygon.io/forex: Subscribing to C.XAU/USD,C.XAG/USD,C.EUR/USD,C.AUD/USD,C.GBP/USD,C.JPY/USD
-<7> 2024-01-08T13:24:03.191Z info:      polygon.io/crypto: Subscribing to XQ.BNB-USD,XQ.BTC-USD,XQ.ETH-USD,XQ.XRP-USD,XQ.ADA-USD,XQ.DOGE-USD,XQ.SOL-USD,XQ.TRX-USD,XQ.DOT-USD,XQ.MATIC-USD,XQ.LTC-USD
-<7> 2024-01-08T13:24:03.985Z info:      sent block 62834 --- polygon.io/forex (3 symbols),polygon.io/crypto (9 symbols) ---transaction 0x85089592fdb1dd574a81b530c89db52372e86cf7a6ed4cd40654ccf2b157341a
-<7> 2024-01-08T13:24:04.836Z info:      sent block 62835 --- polygon.io/forex (3 symbols),polygon.io/crypto (10 symbols) ---transaction 0xfbb53b3ae8e9f9e4f20490b4e117908fa6a2d690d32ca09093ae4bb57a135ecf
-<7> 2024-01-08T13:24:06.078Z info:      sent block 62836 --- polygon.io/forex (3 symbols),polygon.io/crypto (10 symbols) ---transaction 0xc5751f1db8648e60a7d3c2071693124b9c4fff86428ae8bf61bb769b88501879
-<7> 2024-01-08T13:24:06.959Z info:      sent block 62837 --- polygon.io/forex (3 symbols),polygon.io/crypto (10 symbols) ---transaction 0x0019a7b1bf387e83c66c6b02ebac5fbd116827bf2dc5ba5590fec178cda0c6d2
-<7> 2024-01-08T13:24:07.716Z info:      polygon.io/crypto received ping
-<7> 2024-01-08T13:24:07.717Z info:      polygon.io/forex received ping
-<7> 2024-01-08T13:24:07.861Z info:      sent block 62838 --- polygon.io/forex (3 symbols),polygon.io/crypto (10 symbols) ---transaction 0x019394efa93031d614b1b4d65b819b5482bd14334fdd7e442b1e1757da5db504
-<7> 2024-01-08T13:24:09.082Z info:      sent block 62839 --- polygon.io/forex (6 symbols),polygon.io/crypto (10 symbols) ---transaction 0xc3c636a2e0758db14f10085af9efccb1ba202b257962f6d417185aa78c651ceb
-<7> 2024-01-08T13:24:09.966Z info:      sent block 62840 --- polygon.io/forex (6 symbols),polygon.io/crypto (10 symbols) ---transaction 0x8209b500f01ab405a18bfd80f213bb0e5716badd74326173823fdcc2dee6aaaa
-<7> 2024-01-08T13:24:11.183Z info:      sent block 62841 --- polygon.io/forex (6 symbols),polygon.io/crypto (10 symbols) ---transaction 0x0191c5193e7cd4d1d2cdf1bdae1eb6bf3c12f09b04d111325c170a79b9dbc79c
-<7> 2024-01-08T13:24:12.064Z info:      sent block 62842 --- polygon.io/forex (6 symbols),polygon.io/crypto (10 symbols) ---transaction 0xccc119cfb9a9e6a574fc4949b3c602de84fe75786728c557c92c7c29d94402c7
-<7> 2024-01-08T13:24:12.608Z info:      polygon.io/forex received pong
-<7> 2024-01-08T13:24:12.615Z info:      polygon.io/crypto received pong
-<7> 2024-01-08T13:24:12.714Z info:      polygon.io/crypto received ping
-<7> 2024-01-08T13:24:12.716Z info:      polygon.io/forex received ping
+2024-04-11 22:32:04 <1> 2024-04-11T19:32:04.467Z info:  Validator restarts on events: OnConfigChange
+2024-04-11 22:32:04 <1> 2024-04-11T19:32:04.469Z info:  Health endpoints are available through port: 9000
+2024-04-11 22:32:04 <1> 2024-04-11T19:32:04.469Z info:  Prometheus metrics are available through port: 9100
+2024-04-11 22:32:05 <1> 2024-04-11T19:32:05.041Z info:  sent transaction b4f25b20a25c442dd0cb629395ce4b0859b3110f39b617ba5d4a112c5199a2a0 [nonce:0]  to block 256 ---<some_data> ---duration: 0.083 ---block received at 2024-04-11T19:32:04.958Z
+2024-04-11 22:32:06 <1> 2024-04-11T19:32:06.130Z info:  sent transaction 191351c865a81379bace9c94d19fd605fddac04ba738d67bfd42d6618f97a322 [nonce:1]  to block 257 ---<some_data> ---duration: 0.03 ---block received at 2024-04-11T19:32:06.100Z
+2024-04-11 22:32:07 <1> 2024-04-11T19:32:07.257Z info:  sent transaction 118e70a76fa0e65bcc7664b8b1feb6d6e820c0fc38d28968a5175e8b66b088ca [nonce:2]  to block 258 ---<some_data> ---duration: 0.022 ---block received at 2024-04-11T19:32:07.232Z
+2024-04-11 22:32:08 <1> 2024-04-11T19:32:08.334Z info:  sent transaction cd825772a985ba01744712ffffea4376d7ab950e4f1cbf502f5c1189b79374a9 [nonce:3]  to block 259 ---<some_data> ---duration: 0.018 ---block received at 2024-04-11T19:32:08.316Z
+2024-04-11 22:32:09 <1> 2024-04-11T19:32:09.504Z info:  sent transaction ef1b958dad78ca229c9efeff281e7691956634e6aa588fc03a5554b5800865ad [nonce:4]  to block 260 ---<some_data> ---duration: 0.016 ---block received at 2024-04-11T19:32:09.488Z
+2024-04-11 22:32:10 <1> 2024-04-11T19:32:10.671Z info:  sent transaction 322f19fe10759660a8328bd8be6974ef9be5fac861e6069548380d277998091b [nonce:5]  to block 261 ---<some_data> ---duration: 0.021 ---block received at 2024-04-11T19:32:10.650Z
+2024-04-11 22:32:11 <1> 2024-04-11T19:32:11.778Z info:  sent transaction f3e3a27fa1adcd3a89336b14e8342e60b943e9376f11c416128689d1e06d17dd [nonce:6]  to block 262 ---<some_data> ---duration: 0.016 ---block received at 2024-04-11T19:32:11.762Z
+2024-04-11 22:32:12 <1> 2024-04-11T19:32:12.958Z info:  sent transaction f1310e2e16f873a7f121f0359e48a9d0b5de7cb887df6174081e8d2977d231c2 [nonce:7]  to block 263 ---<some_data> ---duration: 0.018 ---block received at 2024-04-11T19:32:12.940Z
+2024-04-11 22:32:14 <1> 2024-04-11T19:32:14.135Z info:  sent transaction c3fed5490435682dfee86b15725ab1514d9f5802e8c7fc5e0f39a43c71bed4fc [nonce:8]  to block 264 ---<some_data> ---duration: 0.014 ---block received at 2024-04-11T19:32:14.121Z
+2024-04-11 22:32:15 <1> 2024-04-11T19:32:15.260Z info:  sent transaction fa0017193eaef5f8b465ccbcb86fb3789d567ed34c688efcc5abc80915ccf0cd [nonce:9]  to block 265 ---<some_data> ---duration: 0.029 ---block received at 2024-04-11T19:32:15.231Z
+2024-04-11 22:32:16 <1> 2024-04-11T19:32:16.399Z info:  sent transaction 5259a10f8dd43acc8e3f66e97b8489299d20caad9f0da0344ed9dea413f3bcf6 [nonce:10]  to block 266 ---<some_data> ---duration: 0.021 ---block received at 2024-04-11T19:32:16.378Z
+2024-04-11 22:32:17 <1> 2024-04-11T19:32:17.505Z info:  sent transaction f0bfeb6223f3bd09ef8f251bb05b3c5c81b1c02ea555c5a2846077e11c145e31 [nonce:11]  to block 267 ---<some_data> ---duration: 0.013 ---block received at 2024-04-11T19:32:17.492Z
+2024-04-11 22:32:18 <1> 2024-04-11T19:32:18.622Z info:
 ```
 
 ### Stop eoracle data validator
