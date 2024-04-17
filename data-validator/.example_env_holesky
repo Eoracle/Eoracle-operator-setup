@@ -1,7 +1,7 @@
 EO_OPERATOR_CLI_IMAGE=eoracle/opr_cli:latest
 EO_DATA_VALIDATOR_IMAGE=eoracle/data-validator:latest
-EO_CHAIN_ETH_RPC=https://rpc.testnet.eoracle.network
-EO_CHAIN_ETH_WS_RPC=wss://rpc.testnet.eoracle.network/ws
+EO_CHAIN_RPC_ENDPOINT=https://rpc.testnet.eoracle.network
+EO_CHAIN_WS_ENDPOINT=wss://rpc.testnet.eoracle.network/ws
 EO_REGISTRY_COORDINATOR=0xc4A6E362e8Bd89F28Eb405F9Aa533784884B9c4F
 EO_STAKE_REGISTRY=0xdda1a381920971642477CA79F5BFc1515414782d
 EO_CONFIG=0xf735Ad57952906a672eEEaDbef3bC69ECD24E50C
