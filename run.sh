@@ -18,14 +18,13 @@ if [ "$1" == "encrypt" ]; then
     fi
     echo "EO_ECDSA_PRIVATE_KEY=$2" > .private_key
     echo "EO_BLS_PRIVATE_KEY=$3" >> .private_key
-    docker run --env-file .env --env-file .private_key --platform linux/amd64 ${private_path} ${EO_OPERATOR_CLI_IMAGE} ${1}
+    docker rm -f eoracle-operator-cli > /dev/null 2>&1
+    docker run --name=eoracle-operator-cli --env-file .env --env-file .private_key --platform linux/amd64 ${private_path} ${EO_OPERATOR_CLI_IMAGE} ${1}
     rm .private_key > /dev/null 2>&1
-elif [ "$1" == "register" ] || [ "$1" == "deregister" ] || [ "$1" == "print-status" ] || [ "$1" == "decrypt" ] || [ "$1" == "generate-bls-key" ]; then
+else 
     _cmd=$1
     shift
-    docker run --env-file .env ${private_path} --platform linux/amd64 ${EO_OPERATOR_CLI_IMAGE} "${_cmd} $@"
-else    
-    # invalid arg
-    echo "run.sh => Invalid argument: ${1}"
+    docker rm -f eoracle-operator-cli > /dev/null 2>&1
+    docker run --name=eoracle-operator-cli --env-file .env ${private_path} --platform linux/amd64 ${EO_OPERATOR_CLI_IMAGE} "${_cmd} $@"
 fi
 cd ..
