@@ -3,10 +3,6 @@ This guide will walk you through the process of registering as an operator to eo
 
 ## Prerequisites
 1. **Registered Eigenlayer Operator Account:** Ensure you have a fully registered Eigenlayer operator account. If you don't have one, follow the steps in the [Eigenlayer User Guide](https://docs.eigenlayer.xyz/restaking-guides/restaking-user-guide) to create and fund your account.
-2. **Activate as eoracle operator:** Ensure eoracle activated your account. In order to check your current status you can run the following through [foundry](https://book.getfoundry.sh/getting-started/installation) (1 is activated, 0 is not). In case of issues please contact support@eoracle.io
-```bash
-cast call <EOConfig_Address> "isValidatorActive(address validator)" <your_operator_address> -r https://rpc.eoracle.network | cast 2d
-```
 
 ## Software/Hardware Requirement 
 * Operating System: linux amd x64
@@ -31,6 +27,12 @@ cp data-validator/.example_env data-validator/.env
 ```
 Copy `Eoracle-operator-setup/data-validator/.example_env` into `Eoracle-operator-setup/data-validator/.env`.  
 Edit the `Eoracle-operator-setup/data-validator/.env` and update the values for your setup
+
+[!NOTE]
+If you plan to operate eoracle on Holesky, then copy `.example_env_holeksy` instead of `.example_env`
+```bash
+cp data/validator/.example_env_holeksy data-validaotr/.env`
+```
 
 ### Generate a BLS pair (recommended)
 The register process requires two sets of private keys: an ecdsa private key and a bls private key,  
@@ -99,6 +101,13 @@ Please add EO_SALT=<salt_in_hex> field to your .env file and retry runnning regi
 
 (*) the EO_SALT should be in the following format EO_SALT=0x04 (even length hex number, and could be any number but must be even length)
 
+### Declaring an alias ECDSA address 
+Operators must declare another ECDSA address to use within the eoracle client. This isolates the Ethereum Eigenlayer operator private key from eoracle operations, protecting access to Ethereum assets.
+You can import a private key or generate a new private key. To import , add `--ecdsa-private-key <value>` to the following command.
+```bash
+./run.sh eochain-generate-alias
+```
+
 ### Checking the status of Eoracle operator AVS
 
 The following command will print the status of the operator
@@ -113,10 +122,8 @@ docker-entrypoint-oprcli.sh: Starting oprcli print-status
 {"level":"info","ts":1712824061.3466434,"caller":"logging/zap_logger.go:49","msg":"Operator stake update","stake":"<your_stake>","block number":1253026}
 ```
 
-
-### Deregister from eoracle AVS
-The following command will unregister and opt you out of the eoracle AVS
-
+### Deregister from Eoracle AVS
+The following command will unregister and opt you out of the Eoracle AVS
 ```bash
 cd Eoracle-operator-setup
 ./run.sh deregister
@@ -129,6 +136,24 @@ Deregistered Operator with Coordinator at address 0xd8eA2939cE17316b7CA2F86b121E
 
 ## Running eoracle AVS data validator
 
+**eoracle operator Activation:** Ensure your account has been activated. In order to check your current status you can run the following (1 is activated, 0 is not). Stay tuned for activation windows on social media , for technical issues please contact the eoracle team [here](https://discord.gg/eoracle) on the operators-technical-help channel 
+```bash
+cast call 0x05a6f762f64Ac2ccE0588677317a0Ed8af9d0c16 "isValidatorActive(address validator)" <your alias address> -r https://rpc.eoracle.network | cast 2d
+```
+
+### Declare the alias in eoracle chain
+After generating the ECDSA alias address to use in eoracle chain, declare it using your Ethereum Eigenlayer identity, verifying the link between the two. 
+```bash
+./run.sh declare-alias
+```
+
+The output should look like
+```
+succesfully declared an alias in the eochain
+docker-entrypoint-oprcli.sh: Starting oprcli declare-alias 
+{"level":"info","ts":1712824061.311895,"caller":"logging/zap_logger.go:49","msg":"succesfully declared an alias in the eochain","eochain address":"0x...", "eochain address", "0x...", "tx hash", "0x..."}
+```
+
 ### Run using docker
 Run the docker
 ```bash
@@ -136,7 +161,7 @@ cd data-validator
 docker compose up -d
 ```
 
-The command will start the data validator container, and if you execute `docker ps` you should see an output indicating all containers have the " Up " status with ports assigned.
+The command will start the data validator container. If you execute `docker ps` you should see an output indicating the `eoracle-data-validator` container has the " Up " status with ports assigned.
 You may view the container logs using
 ```bash
 docker logs -f <container_id>

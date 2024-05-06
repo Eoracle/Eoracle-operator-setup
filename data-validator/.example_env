@@ -1,16 +1,16 @@
-EO_OPERATOR_CLI_IMAGE=eoracle/opr_cli:latest
+EO_OPERATOR_CLI_IMAGE=eoracle/opr_cli:v0.0.12
 EO_DATA_VALIDATOR_IMAGE=eoracle/data-validator:latest
-EO_JSON_RPC_ENDPOINT=https://rpc.eoracle.network
-EO_JSON_WS_ENDPOINT=wss://rpc.eoracle.network/ws
+EO_CHAIN_RPC_ENDPOINT=https://rpc.eoracle.network
+EO_CHAIN_WS_ENDPOINT=wss://rpc.eoracle.network/ws
 EO_REGISTRY_COORDINATOR=0x757E6f572AfD8E111bD913d35314B5472C051cA8
 EO_STAKE_REGISTRY=0x761DF0e99160a4bd19391475D2a1101eaab20F24
-EO_CONFIG_ADDRESS=0x # Will be released soon, not needed for registration
-EO_AGGREGATOR_ADDRESS=0x # Will be released soon, not needed for registration
-EO_ETH_RPC=https://eth.llamarpc.com	 # Not guaranteed to work 
+EO_AGGREGATOR_ADDRESS=0x4E70004b01987B4fd7DAcab348F0B39E9AE26110
+EO_CONFIG_ADDRESS=0x05a6f762f64Ac2ccE0588677317a0Ed8af9d0c16
+ETH_RPC_ENDPOINT=https://rpc.flashbots.net
 EO_PASSPHRASE=enterYourPassphraseHere
 EO_KEYSTORE_PATH=.keystore
 EO_PROMETHEUS_PORT=10004
 EO_HEALTH_ENDPOINTS_PORT=10003
 EO_LOGGING_LEVEL=info
 # If registered to any other AVS prior, mandatory to set this to a value other than 0x0 and not used in any other AVS
-EO_SALT=0x4242
+# EO_SALT=0x00
