@@ -81,7 +81,7 @@ Please add EO_SALT=<salt_in_hex> field to your .env file and retry runnning regi
 Operators must declare another ECDSA address to use within the eoracle client. This isolates the Ethereum Eigenlayer operator private key from eoracle operations, protecting access to Ethereum assets.
 You can import a private key or generate a new private key. To import , add `--ecdsa-private-key <value>` to the following command.
 ```bash
-./run.sh eochain-generate-alias
+./run.sh generate-alias
 ```
 
 ```
