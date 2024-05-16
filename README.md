@@ -67,30 +67,6 @@ The output should look like
 ```
 {"level":"info","ts":1712853423.629971,"caller":"logging/zap_logger.go:49","msg":"succesfully registered to eoracle AVS","address":"<your_address>","tx hash":"<your_tx_hash>"}
 ```
-### Declare an eoracle alias 
-Operators must declare another ECDSA address to use within the eoracle client. This isolates the Ethereum Eigenlayer operator private key from eoracle operations, protecting access to Ethereum assets. 
-```
-./run.sh eochain-set-alias
-```
-The output should look like 
-
-```
-alias ecdsa address  <your_alias_address> saved
-{"level":"info","ts":1712869774.0857012,"caller":"logging/zap_logger.go:49","msg":"succesfully set the alias in the eochain","Ethereum address":"<your_ethereum_address>","eochain address":"<your_alias_address>","tx hash":"<tx_hash>"}
-```
-
-This generates an alias ECDSA keypair, encrypts and stores it in the keystore. Importing and plaintext is also enabled but discourged. 
-
-
-```
-❯ ls -la /path/to/keystore.keystore
--rw-r--r--@ 1 <usr>  staff  554 Apr 11 20:18 blsEncryptedWallet.json
--rw-r--r--  1 <usr>  staff  491 Apr 12 00:06 ecdsaAliasedEncryptedWallet.json
--rw-r--r--@ 1 <usr>  staff  491 Apr 11 20:18 ecdsaEncryptedWallet.json
-```
-
-Note: Access to our client source code is currently restricted, however, interested parties may contact support@eoracle.io to review the client for security reasons. 
-
 
 ### Troubleshooting the register command.
 salt already spent - if you get the following error:
@@ -101,12 +77,33 @@ Please add EO_SALT=<salt_in_hex> field to your .env file and retry runnning regi
 
 (*) the EO_SALT should be in the following format EO_SALT=0x04 (even length hex number, and could be any number but must be even length)
 
-### Declaring an alias ECDSA address 
+### Generating an alias ECDSA address 
 Operators must declare another ECDSA address to use within the eoracle client. This isolates the Ethereum Eigenlayer operator private key from eoracle operations, protecting access to Ethereum assets.
 You can import a private key or generate a new private key. To import , add `--ecdsa-private-key <value>` to the following command.
 ```bash
-./run.sh eochain-generate-alias
+./run.sh generate-alias
 ```
+
+```
+❯ ls -la /path/to/keystore.keystore
+-rw-r--r--@ 1 <usr>  staff  554 Apr 11 20:18 blsEncryptedWallet.json
+-rw-r--r--  1 <usr>  staff  491 Apr 12 00:06 ecdsaAliasedEncryptedWallet.json
+-rw-r--r--@ 1 <usr>  staff  491 Apr 11 20:18 ecdsaEncryptedWallet.json
+```
+
+### Declare the alias in eoracle chain
+After generating the ECDSA alias address to use in eoracle chain, declare it using your Ethereum Eigenlayer identity, verifying the link between the two. 
+```bash
+./run.sh declare-alias
+```
+
+The output should look like
+```
+succesfully declared an alias in the eochain
+docker-entrypoint-oprcli.sh: Starting oprcli declare-alias 
+{"level":"info","ts":1712824061.311895,"caller":"logging/zap_logger.go:49","msg":"succesfully declared an alias in the eochain","eochain address":"0x...", "eochain address", "0x...", "tx hash", "0x..."}
+```
+
 
 ### Checking the status of Eoracle operator AVS
 
@@ -141,18 +138,10 @@ Deregistered Operator with Coordinator at address 0xd8eA2939cE17316b7CA2F86b121E
 cast call 0x05a6f762f64Ac2ccE0588677317a0Ed8af9d0c16 "isValidatorActive(address validator)" <your alias address> -r https://rpc.eoracle.network | cast 2d
 ```
 
-### Declare the alias in eoracle chain
-After generating the ECDSA alias address to use in eoracle chain, declare it using your Ethereum Eigenlayer identity, verifying the link between the two. 
-```bash
-./run.sh declare-alias
-```
 
-The output should look like
-```
-succesfully declared an alias in the eochain
-docker-entrypoint-oprcli.sh: Starting oprcli declare-alias 
-{"level":"info","ts":1712824061.311895,"caller":"logging/zap_logger.go:49","msg":"succesfully declared an alias in the eochain","eochain address":"0x...", "eochain address", "0x...", "tx hash", "0x..."}
-```
+
+Note: Access to our client source code is currently restricted, however, interested parties may contact support@eoracle.io to review the client for security reasons. 
+
 
 ### Run using docker
 Run the docker
