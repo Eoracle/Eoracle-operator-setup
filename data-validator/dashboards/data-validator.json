@@ -104,7 +104,7 @@
               "uid": "$data_source"
             },
             "editorMode": "code",
-            "expr": "eigen_performance_score{app=~\"$data_validator\"}",
+            "expr": "eigen_performance_score{}",
             "instant": false,
             "legendFormat": " ",
             "range": true,
@@ -169,7 +169,7 @@
               "uid": "$data_source"
             },
             "editorMode": "code",
-            "expr": "eigen_rpc_request_total{app=~\"$data_validator\"}",
+            "expr": "eigen_rpc_request_total{}",
             "instant": false,
             "legendFormat": "__auto",
             "range": true,
@@ -265,7 +265,7 @@
               "uid": "$data_source"
             },
             "editorMode": "code",
-            "expr": "rate(eoracle_failures{app=~\"$data_validator\"}[5m])",
+            "expr": "rate(eoracle_failures{}[5m])",
             "instant": false,
             "legendFormat": "__auto",
             "range": true,
@@ -334,7 +334,7 @@
               "uid": "$data_source"
             },
             "editorMode": "code",
-            "expr": "eigen_rpc_request_duration_seconds_bucket{app=~\"$data_validator\", le=~\"(0.005|0.01|0.025|0.05|0.1|0.25|0.5|1)\"} / ignoring(le) group_left eigen_rpc_request_duration_seconds_bucket{app=~\"$data_validator\", le=\"+Inf\"}*100",
+            "expr": "eigen_rpc_request_duration_seconds_bucket{le=~\"(0.005|0.01|0.025|0.05|0.1|0.25|0.5|1)\"} / ignoring(le) group_left eigen_rpc_request_duration_seconds_bucket{le=\"+Inf\"}*100",
             "hide": false,
             "instant": false,
             "legendFormat": "{{le}}",
@@ -405,7 +405,7 @@
               "uid": "$data_source"
             },
             "editorMode": "code",
-            "expr": "eoracle_performance_bucket{app=~\"$data_validator\", le=~\"(0.001|0.005|0.01|0.025|0.05|0.1|0.25|0.5|1)\"} / ignoring(le) group_left eoracle_performance_bucket{app=~\"$data_validator\", le=\"+Inf\"}*100",
+            "expr": "eoracle_performance_bucket{le=~\"(0.001|0.005|0.01|0.025|0.05|0.1|0.25|0.5|1)\"} / ignoring(le) group_left eoracle_performance_bucket{le=\"+Inf\"}*100",
             "instant": false,
             "legendFormat": "{{le}}",
             "range": true,
@@ -474,7 +474,7 @@
               "uid": "$data_source"
             },
             "editorMode": "code",
-            "expr": "eoracle_failures{app=~\"$data_validator\"}",
+            "expr": "eoracle_failures{}",
             "instant": false,
             "interval": "",
             "legendFormat": "{{__name__}}",
@@ -570,7 +570,7 @@
               "uid": "$data_source"
             },
             "editorMode": "code",
-            "expr": "eoracle_health_check{app=~\"$data_validator\",name!~\"(service|value)\"}",
+            "expr": "eoracle_health_check{name!~\"(service|value)\"}",
             "instant": false,
             "legendFormat": "{{name}}",
             "range": true,
@@ -648,3 +648,4 @@
     "version": 2,
     "weekStart": ""
   }
+  
