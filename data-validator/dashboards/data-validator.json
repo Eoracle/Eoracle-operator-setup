@@ -342,7 +342,7 @@
             "refId": "C"
           }
         ],
-        "title": "Update Rate Duration",
+        "title": "Update Rate Duration (s)",
         "type": "bargauge"
       },
       {
