@@ -604,6 +604,7 @@
           "includeAll": true,
           "multi": false,
           "name": "data_validator",
+          "label": "Data Validators",
           "options": [],
           "query": {
             "qryType": 1,
