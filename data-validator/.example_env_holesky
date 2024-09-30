@@ -13,5 +13,7 @@ EO_KEYSTORE_PATH=.keystore
 EO_PROMETHEUS_PORT=10004
 EO_HEALTH_ENDPOINTS_PORT=10003
 EO_LOGGING_LEVEL=info
+BSC_FEED_RPC_ENDPOINT=https://rpc.ankr.com/bsc
+MERLIN_FEED_RPC_ENDPOINT=https://rpc.merlinchain.io
 # If registered to any other AVS prior, mandatory to set this to a value other than 0x0 and not used in any other AVS
 # EO_SALT=0x00
