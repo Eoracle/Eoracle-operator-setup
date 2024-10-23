@@ -1,4 +1,4 @@
-EO_OPERATOR_CLI_IMAGE=eoracle/opr_cli:latest
+EO_OPERATOR_CLI_IMAGE=eoracle/opr_cli:v0.0.12
 EO_DATA_VALIDATOR_IMAGE=eoracle/data-validator:latest
 EO_CHAIN_RPC_ENDPOINT=https://rpc.testnet.eoracle.network
 EO_CHAIN_WS_ENDPOINT=wss://rpc.testnet.eoracle.network/ws
@@ -7,14 +7,26 @@ EO_STAKE_REGISTRY=0xdda1a381920971642477CA79F5BFc1515414782d
 EO_CONFIG_ADDRESS=0xf735Ad57952906a672eEEaDbef3bC69ECD24E50C
 EO_AGGREGATOR_ADDRESS=0x6B0BE2aaD42612803c9Fc389A3806EF21E8cbDb6
 ETH_RPC_ENDPOINT=https://ethereum-holesky-rpc.publicnode.com
-ETHEREUM_FEED_RPC_ENDPOINT=https://some.ethereum.rpc
 EO_PASSPHRASE=enterYourPassphraseHere
 EO_KEYSTORE_PATH=.keystore
 EO_PROMETHEUS_PORT=10004
 EO_HEALTH_ENDPOINTS_PORT=10003
 EO_LOGGING_LEVEL=info
-AMBERDATA_API_KEY=YourAPIKey
-EO_CCDATA_API_KEY=YourAPIKey
+
+# ETHEREUM_FEED_RPC_ENDPOINT, make sure you use a stable rpc endpoint to Ethereum Mainnet
+ETHEREUM_FEED_RPC_ENDPOINT=https://rpc.flashbots.net
+# BSC_FEED_RPC_ENDPOINT, make sure you use a stable rpc endpoint to BSC Mainnet
+BSC_FEED_RPC_ENDPOINT=https://rpc-bsc.48.club
+# TRX_FEED_RPC_ENDPOINT, make sure you use a stable rpc endpoint to Tron Mainnet
+TRX_FEED_RPC_ENDPOINT=https://api.trongrid.io
+# MERLIN_FEED_RPC_ENDPOINT, make sure you use a stable rpc endpoint to Merlin Mainnet
+MERLIN_FEED_RPC_ENDPOINT=https://rpc.merlinchain.io
+
+# AMBERDATA_API_KEY, if you have a key for amberdata, uncomment the following line and add the key
+# AMBERDATA_API_KEY=YourAPIKey
+# EO_CCDATA_API_KEY, if you have a key for ccdata, uncomment the following line and add the key
+# EO_CCDATA_API_KEY=YourAPIKey
+
 
 # If registered to any other AVS prior, mandatory to set this to a value other than 0x0 and not used in any other AVS
 # EO_SALT=0x00
