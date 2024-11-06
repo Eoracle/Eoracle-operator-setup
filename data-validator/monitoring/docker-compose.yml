@@ -6,9 +6,23 @@ networks:
     driver: bridge
 
 volumes:
+  vmagentdata: {}
   prometheus_data: {}
 
 services:
+  vmagent:
+    image: victoriametrics/vmagent:v1.104.0
+    container_name: vmagent
+    restart: unless-stopped
+    volumes:
+      - vmagentdata:/vmagentdata
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--promscrape.config=/etc/prometheus/prometheus.yml"
+      - "--remoteWrite.url=https://metrics.eoracle.io/api/v1/write"
+    networks:
+      - monitoring
+
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
