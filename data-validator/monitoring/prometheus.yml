@@ -8,8 +8,3 @@ scrape_configs:
   - job_name: 'eoracle-data-validator'
     static_configs:
       - targets: ['eoracle-data-validator:<PROMETHEUS_PORT>']
-    metric_relabel_configs:
-    - target_label: operator_address
-      replacement: <OPERATOR_ADDRESS>
-    - target_label: eochain
-      replacement: <mainnet|testnet>
