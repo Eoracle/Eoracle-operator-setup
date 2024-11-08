@@ -3,7 +3,7 @@ If you want to set up monitoring using docker, you can use the following command
 
 In the `monitoring` folder
 
-Make sure your prometheus config [file](./prometheus.yml) is updated with the following
+Make sure your [prometheus](./prometheus.yml) and [VM-agent](./vmagent.yml) config files is updated with the following
   * the metrics port (`PROMETHEUS_PORT`) of the eOracle data validator
 
 You have the option to submit your data validator metrics to the eOracle monitoring platform. If you want to do that, you will need to update the following
