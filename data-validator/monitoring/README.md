@@ -6,7 +6,8 @@ In the `monitoring` folder
 Make sure your prometheus config [file](./prometheus.yml) is updated with the following
   * the metrics port (`PROMETHEUS_PORT`) of the eOracle data validator
 
-You have the option to submit your data validator metrics to the eOracle monitoring platform. If you want to do that, you will need to update the following
+You have the option to submit your data validator metrics to the eOracle monitoring platform. If you want to do that, you will need to update the VM-agent config [file](./vmagent.yml) with the following
+  * the metrics port (`PROMETHEUS_PORT`) of the eOracle data validator
   * the operator address (`OPERATOR_ADDRESS`)
   * the eochain (`eochain`) either mainnet or testnet
 

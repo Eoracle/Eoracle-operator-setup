@@ -16,9 +16,9 @@ services:
     restart: unless-stopped
     volumes:
       - vmagentdata:/vmagentdata
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./vmagent.yml:/etc/vmagent/vmagent.yml
     command:
-      - "--promscrape.config=/etc/prometheus/prometheus.yml"
+      - "--promscrape.config=/etc/vmagent/vmagent.yml"
       - "--remoteWrite.url=https://metrics.eoracle.io/api/v1/write"
     networks:
       - monitoring

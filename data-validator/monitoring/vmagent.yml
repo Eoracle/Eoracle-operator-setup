@@ -2,9 +2,11 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
-  - job_name: 'node'
-    static_configs:
-      - targets: ['node-exporter:9100']
   - job_name: 'eoracle-data-validator'
     static_configs:
       - targets: ['eoracle-data-validator:<PROMETHEUS_PORT>']
+    metric_relabel_configs:
+    - target_label: operator_address
+      replacement: <OPERATOR_ADDRESS>
+    - target_label: eochain
+      replacement: <mainnet|testnet>
