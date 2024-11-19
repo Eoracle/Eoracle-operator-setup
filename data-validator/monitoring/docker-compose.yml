@@ -1,6 +1,9 @@
 version: "3.8"
 
 networks:
+  eoracle-data-validator:
+    name: eoracle-data-validator
+    driver: bridge
   monitoring:
     name: monitoring
     driver: bridge
@@ -20,8 +23,11 @@ services:
     command:
       - "--promscrape.config=/etc/vmagent/vmagent.yml"
       - "--remoteWrite.url=https://metrics.eoracle.io/api/v1/write"
+    ports:
+      - 8429:8429
     networks:
       - monitoring
+      - eoracle-data-validator
 
   node-exporter:
     image: prom/node-exporter:latest
