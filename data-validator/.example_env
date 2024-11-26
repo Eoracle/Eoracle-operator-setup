@@ -20,6 +20,8 @@ BSC_FEED_RPC_ENDPOINT=https://rpc-bsc.48.club
 TRX_FEED_RPC_ENDPOINT=https://api.trongrid.io
 # MERLIN_FEED_RPC_ENDPOINT, make sure you use a stable rpc endpoint to Merlin Mainnet
 MERLIN_FEED_RPC_ENDPOINT=https://rpc.merlinchain.io
+#BITLAYER_FEED_RPC_ENDPOINT, make sure you use a stable rpc endpoint to Bitlayer Mainnet
+BITLAYER_FEED_RPC_ENDPOINT=https://rpc.bitlayer-rpc.com
 
 # AMBERDATA_API_KEY, if you have a key for amberdata, uncomment the following line and add the key
 # AMBERDATA_API_KEY=YourAPIKey
