@@ -9,9 +9,11 @@ EO_CONFIG_ADDRESS=0x05a6f762f64Ac2ccE0588677317a0Ed8af9d0c16
 ETH_RPC_ENDPOINT=https://rpc.flashbots.net
 EO_PASSPHRASE=enterYourPassphraseHere
 EO_KEYSTORE_PATH=.keystore
+EO_DATA_PORT=10005
 EO_PROMETHEUS_PORT=10004
 EO_HEALTH_ENDPOINTS_PORT=10003
 EO_LOGGING_LEVEL=info
+EO_LOG_OUT_PATH=./logs
 # ETHEREUM_FEED_RPC_ENDPOINT, make sure you use a stable rpc endpoint to Ethereum Mainnet
 ETHEREUM_FEED_RPC_ENDPOINT=https://rpc.flashbots.net
 # BSC_FEED_RPC_ENDPOINT, make sure you use a stable rpc endpoint to BSC Mainnet

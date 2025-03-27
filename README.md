@@ -28,8 +28,9 @@ cp data-validator/.example_env data-validator/.env
 Copy `Eoracle-operator-setup/data-validator/.example_env` into `Eoracle-operator-setup/data-validator/.env`.  
 Edit the `Eoracle-operator-setup/data-validator/.env` and update the values for your setup
 
-[!NOTE]
-If you plan to operate eoracle on Holesky, then copy `.example_env_holeksy` instead of `.example_env`
+[**NOTE**]
+If you plan to operate eoracle on Holesky, then copy `.example_env_holeksy` instead of `.example_env` and current 
+process of registration can be ommited since you'll need contact support to register for now.  
 ```bash
 cp data/validator/.example_env_holeksy data-validaotr/.env`
 ```
