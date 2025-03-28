@@ -29,8 +29,7 @@ Copy `Eoracle-operator-setup/data-validator/.example_env` into `Eoracle-operator
 Edit the `Eoracle-operator-setup/data-validator/.env` and update the values for your setup
 
 [**NOTE**]
-If you plan to operate eoracle on Holesky, then copy `.example_env_holeksy` instead of `.example_env` and current 
-process of registration can be ommited since you'll need contact support to register for now.  
+If you plan to operate eoracle on Holesky, then copy `.example_env_holeksy` instead of `.example_env`.  
 ```bash
 cp data/validator/.example_env_holeksy data-validaotr/.env`
 ```
@@ -93,7 +92,11 @@ You can import a private key or generate a new private key. To import , add `--e
 ```
 
 ### Declare the alias in eoracle chain
-After generating the ECDSA alias address to use in eoracle chain, declare it using your Ethereum Eigenlayer identity, verifying the link between the two. 
+After generating the ECDSA alias address to use in eoracle chain, declare it using your Ethereum Eigenlayer identity, verifying the link between the two.
+and current
+
+[**NOTE**]
+Command below wouldn't work on Holesky and you'll need contact support to register for now.
 ```bash
 ./run.sh declare-alias
 ```
@@ -109,6 +112,9 @@ docker-entrypoint-oprcli.sh: Starting oprcli declare-alias
 ### Checking the status of Eoracle operator AVS
 
 The following command will print the status of the operator
+
+[**NOTE**]
+Command below wouldn't work on Holesky and you'll need contact support to register for now.
 ```bash
 ./run.sh print-status
 ```
