@@ -1,4 +1,3 @@
-EO_CHAIN_RPC_ENDPOINT=https://rpc.testnet.eoracle.network
 EO_REGISTRY_COORDINATOR=0xc4A6E362e8Bd89F28Eb405F9Aa533784884B9c4F
 EO_STAKE_REGISTRY=0xdda1a381920971642477CA79F5BFc1515414782d
 EO_AGGREGATOR_ADDRESS=0x6B0BE2aaD42612803c9Fc389A3806EF21E8cbDb6
@@ -7,6 +6,7 @@ EO_OPERATOR_CLI_IMAGE=eoracle/opr_cli:v0.0.12
 EO_DATA_VALIDATOR_IMAGE=eoracle/data-validator:v2-latest
 
 ETH_RPC_ENDPOINT=https://ethereum-holesky-rpc.publicnode.com
+EO_CHAIN_RPC_ENDPOINT=https://rpc.testnet.eoracle.network
 # eOracle chain web socket endpoint
 EO_CHAIN_WS_ENDPOINT=wss://rpc.testnet.eoracle.network/ws
 
@@ -51,7 +51,7 @@ EO_REGISTRY_ADDRESS=0x50D71ED6BDB562DCD1AEE725BE974B19B0B5DF7C
 EO_CONFIG_ADDRESS=0xa72c694e619dd339ab33415e07f0afc793555053
 
 # Endpoint of the Ethereum feed RPC (default: "wss://eth.llamarpc.com")
-ENDPOINT_ETHEREUM_FEED_RPC=wss://ethereum-holesky-rpc.publicnode.com
+ENDPOINT_ETHEREUM_FEED_RPC=wss://ethereum-rpc.publicnode.com
 
 # Endpoint of the Bera feed RPC (default: "wss://rpc.berachain.com")
 # ENDPOINT_BERA_FEED_RPC=
