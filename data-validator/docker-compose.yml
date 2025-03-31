@@ -1,14 +1,15 @@
-version: "3.8"
 services:
   data-validator:
     env_file:
       - .env
     container_name: eoracle-data-validator
     ports:
+      - ${EO_DATA_PORT}:${EO_DATA_PORT}
       - ${EO_PROMETHEUS_PORT}:${EO_PROMETHEUS_PORT}
       - ${EO_HEALTH_ENDPOINTS_PORT}:${EO_HEALTH_ENDPOINTS_PORT}
     volumes:
       - ./${EO_KEYSTORE_PATH}:/app/${EO_KEYSTORE_PATH}:rw
+      - ./${EO_LOG_OUT_PATH}:/app/${EO_LOG_OUT_PATH}:rw
     logging:
       driver: "json-file"
       options:

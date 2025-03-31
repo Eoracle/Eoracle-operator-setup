@@ -1,34 +1,113 @@
-EO_OPERATOR_CLI_IMAGE=eoracle/opr_cli:v0.0.12
-EO_DATA_VALIDATOR_IMAGE=eoracle/data-validator:latest
-EO_CHAIN_RPC_ENDPOINT=https://rpc.testnet.eoracle.network
-EO_CHAIN_WS_ENDPOINT=wss://rpc.testnet.eoracle.network/ws
 EO_REGISTRY_COORDINATOR=0xc4A6E362e8Bd89F28Eb405F9Aa533784884B9c4F
 EO_STAKE_REGISTRY=0xdda1a381920971642477CA79F5BFc1515414782d
-EO_CONFIG_ADDRESS=0xf735Ad57952906a672eEEaDbef3bC69ECD24E50C
 EO_AGGREGATOR_ADDRESS=0x6B0BE2aaD42612803c9Fc389A3806EF21E8cbDb6
+
+EO_OPERATOR_CLI_IMAGE=eoracle/opr_cli:v0.0.12
+EO_DATA_VALIDATOR_IMAGE=eoracle/data-validator:v2-latest
+
 ETH_RPC_ENDPOINT=https://ethereum-holesky-rpc.publicnode.com
-EO_PASSPHRASE=enterYourPassphraseHere
+EO_CHAIN_RPC_ENDPOINT=https://rpc.testnet.eoracle.network
+# eOracle chain web socket endpoint
+EO_CHAIN_WS_ENDPOINT=wss://rpc.testnet.eoracle.network/ws
+
+# eOracle keystore path
 EO_KEYSTORE_PATH=.keystore
+# [REQUIRED] eOracle private key passphrase
+EO_PASSPHRASE=enterYourPassphraseHere
+
+# [REQUIRED] eOracle operator main address
+EO_MAIN_ADDRESS=enterYourMainAddressHere
+# [REQUIRED] eOracle OVS key mapping as a mapping of wallet address used to sign transactions for the OVS,
+# paired with their corresponding OVS address.
+# (example: 0xSignerWalletAddress1:0xOvsAddress1)
+EO_OVS_KEY_MAPPING=enterYourAliasAddressHere:0x530fCc836C42a803146d48be8Af295bA9756E266
+
+# eOracle data port
+EO_DATA_PORT=10005
+# eOracle Prometheus port
 EO_PROMETHEUS_PORT=10004
+# eOracle health endpoints port
 EO_HEALTH_ENDPOINTS_PORT=10003
-EO_LOGGING_LEVEL=info
 
-# ETHEREUM_FEED_RPC_ENDPOINT, make sure you use a stable rpc endpoint to Ethereum Mainnet
-ETHEREUM_FEED_RPC_ENDPOINT=https://rpc.flashbots.net
-# BSC_FEED_RPC_ENDPOINT, make sure you use a stable rpc endpoint to BSC Mainnet
-BSC_FEED_RPC_ENDPOINT=https://rpc-bsc.48.club
-# TRX_FEED_RPC_ENDPOINT, make sure you use a stable rpc endpoint to Tron Mainnet
-TRX_FEED_RPC_ENDPOINT=https://api.trongrid.io
-# MERLIN_FEED_RPC_ENDPOINT, make sure you use a stable rpc endpoint to Merlin Mainnet
-MERLIN_FEED_RPC_ENDPOINT=https://rpc.merlinchain.io
-#BITLAYER_FEED_RPC_ENDPOINT, make sure you use a stable rpc endpoint to Bitlayer Mainnet
-BITLAYER_FEED_RPC_ENDPOINT=https://rpc.bitlayer-rpc.com
+# log level (available levels: TRC, DBG, INF, WRN, ERR, FTL, PNC) (default: "INF")
+EO_LOGGING_LEVEL=INF
+# log level for file log output (available levels: TRC, DBG, INF, WRN, ERR, FTL, PNC) (default: "TRC")
+EO_LOG_LEVEL_FILE=DBG
+# maximum age of the log file before it gets rotated (in days) (default: 7)
+EO_LOG_FILE_MAX_AGE=7
+# maximum size of the log file before it gets rotated (in megabytes) (default: 100)
+EO_LOG_FILE_MAX_SIZE=100
+# maximum number of log file backups (default: 4)
+EO_LOG_FILE_MAX_BACKUPS=4
+# path to the log directory
+EO_LOG_OUT_PATH=./logs
+# file name for file log output, if not set logs won't be written to file
+# use cat, tail, or less to read the logs
+#EO_LOG_FILE_NAME=$EO_LOG_OUT_PATH/data-validator.log
 
-# AMBERDATA_API_KEY, if you have a key for amberdata, uncomment the following line and add the key
-# AMBERDATA_API_KEY=YourAPIKey
-# EO_CCDATA_API_KEY, if you have a key for ccdata, uncomment the following line and add the key
-# EO_CCDATA_API_KEY=YourAPIKey
+# eOracle chain registry contract address
+EO_REGISTRY_ADDRESS=0x50D71ED6BDB562DCD1AEE725BE974B19B0B5DF7C
+# eOracle chain config contract address
+EO_CONFIG_ADDRESS=0xa72c694e619dd339ab33415e07f0afc793555053
 
+# Endpoint of the Ethereum feed RPC (default: "wss://eth.llamarpc.com")
+ENDPOINT_ETHEREUM_FEED_RPC=wss://ethereum-rpc.publicnode.com
+
+# Endpoint of the Bera feed RPC (default: "wss://rpc.berachain.com")
+# ENDPOINT_BERA_FEED_RPC=
+
+# Endpoint of the Binance WS (default: "wss://stream.binance.com:9443/stream")
+# ENDPOINT_BINANCE_WS=
+
+# Endpoint of the Bitfinex WS (default: "wss://api-pub.bitfinex.com/ws/2")
+# ENDPOINT_BITFINEX_WS=
+
+# Endpoint of the BitLayer feed RPC (default: "wss://ws.bitlayer-rpc.com")
+# ENDPOINT_BITLAYER_FEED_RPC=
+
+# Endpoint of the Bitmart WS (default: "wss://ws-manager-compress.bitmart.com/api?protocol=1.1")
+# ENDPOINT_BITMART_WS=
+
+# Endpoint of the BSC feed RPC (default: "wss://binance.llamarpc.com")
+# ENDPOINT_BSC_FEED_RPC=
+
+# Endpoint of the Bybit WS (default: "wss://stream.bybit.com/v5/public/spot")
+# ENDPOINT_BYBIT_WS=
+
+# Endpoint of the coinbase source (default: "wss://ws-feed.exchange.coinbase.com")
+# ENDPOINT_COINBASE=
+
+# Endpoint of the Gateio WS (default: "wss://api.gateio.ws/ws/v4/")
+# ENDPOINT_GATEIO_WS=
+
+# Endpoint of the Houbi WS (default: "wss://api-aws.huobi.pro/ws")
+# ENDPOINT_HOUBI_WS=
+
+# Endpoint of the Kraken WS (default: "wss://ws.kraken.com/v2")
+# ENDPOINT_KRAKEN_WS=
+
+# Endpoint of the Merlin RPC (default: "wss://rpc.merlinchain.io")
+# ENDPOINT_MERLIN_RPC=
+
+# [REQUIRED TO ENABLE] Auth key for the coingecko source
+# ENDPOINT_COINGECKO_AUTH=
+# Endpoint of the coingecko source (default: "https://pro-api.coingecko.com/api/v3")
+# ENDPOINT_COINGECKO=
+
+# [REQUIRED TO ENABLE] Auth key for the Amberdata source
+# ENDPOINT_AMBERDATA_AUTH=
+# Endpoint of the Amberdata WS (default: "wss://ws.web3api.io")
+# ENDPOINT_AMBERDATA_WS=
+
+# [REQUIRED TO ENABLE] Auth key for the CCData source
+# ENDPOINT_CCDATA_AUTH=
+# Endpoint of the CCData WS (default: "wss://data-streamer.cryptocompare.com")
+# ENDPOINT_CCDATA_WS=
+
+# [REQUIRED TO ENABLE] Auth key for the coinmarketcap source
+# ENDPOINT_COINMARKETCAP_AUTH=
+# Endpoint of the coinmarketcap source (default: "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest")
+# ENDPOINT_COINMARKETCAP=
 
 # If registered to any other AVS prior, mandatory to set this to a value other than 0x0 and not used in any other AVS
 # EO_SALT=0x00
