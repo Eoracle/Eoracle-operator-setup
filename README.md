@@ -93,10 +93,7 @@ You can import a private key or generate a new private key. To import , add `--e
 
 ### Declare the alias in eoracle chain
 After generating the ECDSA alias address to use in eoracle chain, declare it using your Ethereum Eigenlayer identity, verifying the link between the two.
-and current
 
-[**NOTE**]
-Command below wouldn't work on Holesky and you'll need contact support to register for now.
 ```bash
 ./run.sh declare-alias
 ```
@@ -113,8 +110,6 @@ docker-entrypoint-oprcli.sh: Starting oprcli declare-alias
 
 The following command will print the status of the operator
 
-[**NOTE**]
-Command below wouldn't work on Holesky and you'll need contact support to register for now.
 ```bash
 ./run.sh print-status
 ```
