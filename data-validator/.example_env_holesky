@@ -4,7 +4,7 @@ EO_STAKE_REGISTRY=0xdda1a381920971642477CA79F5BFc1515414782d
 EO_AGGREGATOR_ADDRESS=0x6B0BE2aaD42612803c9Fc389A3806EF21E8cbDb6
 
 EO_OPERATOR_CLI_IMAGE=eoracle/opr_cli:v0.0.12
-EO_DATA_VALIDATOR_IMAGE=eoracle/data-validator:v2.0.0
+EO_DATA_VALIDATOR_IMAGE=eoracle/data-validator:v2-latest
 
 ETH_RPC_ENDPOINT=https://ethereum-holesky-rpc.publicnode.com
 # eOracle chain web socket endpoint
