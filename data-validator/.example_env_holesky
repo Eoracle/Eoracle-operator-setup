@@ -3,15 +3,24 @@ EO_REGISTRY_COORDINATOR=0xc4A6E362e8Bd89F28Eb405F9Aa533784884B9c4F
 EO_STAKE_REGISTRY=0xdda1a381920971642477CA79F5BFc1515414782d
 EO_AGGREGATOR_ADDRESS=0x6B0BE2aaD42612803c9Fc389A3806EF21E8cbDb6
 
-ETH_RPC_ENDPOINT=https://ethereum-holesky-rpc.publicnode.com
-
 EO_OPERATOR_CLI_IMAGE=eoracle/opr_cli:v0.0.12
 EO_DATA_VALIDATOR_IMAGE=eoracle/data-validator:v2.0.0
 
-# eOracle private key passphrase
-EO_PASSPHRASE=enterYourPassphraseHere
+ETH_RPC_ENDPOINT=https://ethereum-holesky-rpc.publicnode.com
+# eOracle chain web socket endpoint
+EO_CHAIN_WS_ENDPOINT=wss://rpc.testnet.eoracle.network/ws
+
 # eOracle keystore path
 EO_KEYSTORE_PATH=.keystore
+# [REQUIRED] eOracle private key passphrase
+EO_PASSPHRASE=enterYourPassphraseHere
+
+# [REQUIRED] eOracle operator main address
+EO_MAIN_ADDRESS=enterYourMainAddressHere
+# [REQUIRED] eOracle OVS key mapping as a mapping of wallet address used to sign transactions for the OVS,
+# paired with their corresponding OVS address.
+# (example: 0xSignerWalletAddress1:0xOvsAddress1)
+EO_OVS_KEY_MAPPING=enterYourAliasAddressHere:0x530fCc836C42a803146d48be8Af295bA9756E266
 
 # eOracle data port
 EO_DATA_PORT=10005
@@ -41,59 +50,64 @@ EO_REGISTRY_ADDRESS=0x50D71ED6BDB562DCD1AEE725BE974B19B0B5DF7C
 # eOracle chain config contract address
 EO_CONFIG_ADDRESS=0xa72c694e619dd339ab33415e07f0afc793555053
 
-# eOracle operator main address
-EO_MAIN_ADDRESS=enterYourMainAddressHere
-# eOracle OVS key mapping as a list of wallet addresses used to sign transactions for the OVS,
-# paired with their corresponding OVS addresses.
-# Each pair is separated by a colon and multiple pairs are separated by commas.
-# (example: 0xSignerWalletAddress1:0xOvsAddress1,0xSignerWalletAddress2:0xOvsAddress2)
-EO_OVS_KEY_MAPPING=enterYourAliasAddressHere:0x530fCc836C42a803146d48be8Af295bA9756E266
-
-# eOracle chain web socket endpoint
-EO_CHAIN_WS_ENDPOINT=wss://rpc.testnet.eoracle.network/ws
-
 # Endpoint of the Ethereum feed RPC (default: "wss://eth.llamarpc.com")
 ENDPOINT_ETHEREUM_FEED_RPC=wss://ethereum-holesky-rpc.publicnode.com
-# Auth key for the Amberdata source
+
+# Endpoint of the Bera feed RPC (default: "wss://rpc.berachain.com")
+# ENDPOINT_BERA_FEED_RPC=
+
+# Endpoint of the Binance WS (default: "wss://stream.binance.com:9443/stream")
+# ENDPOINT_BINANCE_WS=
+
+# Endpoint of the Bitfinex WS (default: "wss://api-pub.bitfinex.com/ws/2")
+# ENDPOINT_BITFINEX_WS=
+
+# Endpoint of the BitLayer feed RPC (default: "wss://ws.bitlayer-rpc.com")
+# ENDPOINT_BITLAYER_FEED_RPC=
+
+# Endpoint of the Bitmart WS (default: "wss://ws-manager-compress.bitmart.com/api?protocol=1.1")
+# ENDPOINT_BITMART_WS=
+
+# Endpoint of the BSC feed RPC (default: "wss://binance.llamarpc.com")
+# ENDPOINT_BSC_FEED_RPC=
+
+# Endpoint of the Bybit WS (default: "wss://stream.bybit.com/v5/public/spot")
+# ENDPOINT_BYBIT_WS=
+
+# Endpoint of the coinbase source (default: "wss://ws-feed.exchange.coinbase.com")
+# ENDPOINT_COINBASE=
+
+# Endpoint of the Gateio WS (default: "wss://api.gateio.ws/ws/v4/")
+# ENDPOINT_GATEIO_WS=
+
+# Endpoint of the Houbi WS (default: "wss://api-aws.huobi.pro/ws")
+# ENDPOINT_HOUBI_WS=
+
+# Endpoint of the Kraken WS (default: "wss://ws.kraken.com/v2")
+# ENDPOINT_KRAKEN_WS=
+
+# Endpoint of the Merlin RPC (default: "wss://rpc.merlinchain.io")
+# ENDPOINT_MERLIN_RPC=
+
+# [REQUIRED TO ENABLE] Auth key for the coingecko source
+# ENDPOINT_COINGECKO_AUTH=
+# Endpoint of the coingecko source (default: "https://pro-api.coingecko.com/api/v3")
+# ENDPOINT_COINGECKO=
+
+# [REQUIRED TO ENABLE] Auth key for the Amberdata source
 # ENDPOINT_AMBERDATA_AUTH=
 # Endpoint of the Amberdata WS (default: "wss://ws.web3api.io")
 # ENDPOINT_AMBERDATA_WS=
-# Endpoint of the Bera feed RPC (default: "wss://rpc.berachain.com")
-# ENDPOINT_BERA_FEED_RPC=
-# Endpoint of the Binance WS (default: "wss://stream.binance.com:9443/stream")
-# ENDPOINT_BINANCE_WS=
-# Endpoint of the Bitfinex WS (default: "wss://api-pub.bitfinex.com/ws/2")
-# ENDPOINT_BITFINEX_WS=
-# Endpoint of the BitLayer feed RPC (default: "wss://ws.bitlayer-rpc.com")
-# ENDPOINT_BITLAYER_FEED_RPC=
-# Endpoint of the Bitmart WS (default: "wss://ws-manager-compress.bitmart.com/api?protocol=1.1")
-# ENDPOINT_BITMART_WS=
-# Endpoint of the BSC feed RPC (default: "wss://binance.llamarpc.com")
-# ENDPOINT_BSC_FEED_RPC=
-# Endpoint of the Bybit WS (default: "wss://stream.bybit.com/v5/public/spot")
-# ENDPOINT_BYBIT_WS=
-# Auth key for the CCData source
+
+# [REQUIRED TO ENABLE] Auth key for the CCData source
 # ENDPOINT_CCDATA_AUTH=
 # Endpoint of the CCData WS (default: "wss://data-streamer.cryptocompare.com")
 # ENDPOINT_CCDATA_WS=
-# Endpoint of the coinbase source (default: "wss://ws-feed.exchange.coinbase.com")
-# ENDPOINT_COINBASE=
-# Endpoint of the coingecko source (default: "https://pro-api.coingecko.com/api/v3")
-# ENDPOINT_COINGECKO=
-# Auth key for the coingecko source
-# ENDPOINT_COINGECKO_AUTH=
+
+# [REQUIRED TO ENABLE] Auth key for the coinmarketcap source
+# ENDPOINT_COINMARKETCAP_AUTH=
 # Endpoint of the coinmarketcap source (default: "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest")
 # ENDPOINT_COINMARKETCAP=
-# Auth key for the coinmarketcap source
-# ENDPOINT_COINMARKETCAP_AUTH=
-# Endpoint of the Gateio WS (default: "wss://api.gateio.ws/ws/v4/")
-# ENDPOINT_GATEIO_WS=
-# Endpoint of the Houbi WS (default: "wss://api-aws.huobi.pro/ws")
-# ENDPOINT_HOUBI_WS=
-# Endpoint of the Kraken WS (default: "wss://ws.kraken.com/v2")
-# ENDPOINT_KRAKEN_WS=
-# Endpoint of the Merlin RPC (default: "wss://rpc.merlinchain.io")
-# ENDPOINT_MERLIN_RPC=
 
 # If registered to any other AVS prior, mandatory to set this to a value other than 0x0 and not used in any other AVS
 # EO_SALT=0x00

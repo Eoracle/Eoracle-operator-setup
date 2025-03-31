@@ -160,10 +160,13 @@ docker compose up -d
 The command will start the data validator container. If you execute `docker ps` you should see an output indicating the `eoracle-data-validator` container has the " Up " status with ports assigned.
 You may view the container logs using
 ```bash
-docker logs -f <container_id>
+docker logs -f eoracle-data-validator
 ```
 
-The following example log messages confirm that your eoracle data validator software is up and running
+#### Data Validator V1 logs
+
+The following example log messages confirm that your eOracle data validator software is up and running. Please ensure that your alias is declared and activated.
+
 ```sh
 2024-04-11 22:32:04 <1> 2024-04-11T19:32:04.467Z info:  Validator restarts on events: OnConfigChange
 2024-04-11 22:32:04 <1> 2024-04-11T19:32:04.469Z info:  Health endpoints are available through port: 9000
@@ -183,6 +186,48 @@ The following example log messages confirm that your eoracle data validator soft
 2024-04-11 22:32:18 <1> 2024-04-11T19:32:18.622Z info:
 ```
 
+#### Data Validator V2 logs
+
+The following example log messages confirm that your eOracle data validator software is up and running. Please ensure that your alias is declared and activated.
+
+```sh
+{"lvl":"INF","component":"validator","healthEndpointsPort":9000,"prometheusPort":9100,"dataPort":9200,"t":"2025-03-28T17:43:24.921","msg":"HTTP servers started"}
+{"lvl":"INF","component":"validator","configProvider":"0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9","registryContractAddress":"0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512","ovsAddresses":"HashSet\n0x5FC8d32690cc91D4c39d9d3abcBD16989F875707","mainAddress":"0x70997970C51812dc3A010C7d01b50e0d17dc79C8","keyStorePath":"/Users/michael-eoracle/Projects/core/go-datavalidator/.keystore","t":"2025-03-28T17:43:25.663","msg":"configProvider started"}
+{"lvl":"INF","component":"validator","t":"2025-03-28T17:43:25.741","msg":"configProvider is running"}
+{"lvl":"INF","component":"validator","t":"2025-03-28T17:43:25.741","msg":"calling onSourcesChange"}
+{"lvl":"INF","component":"validator","t":"2025-03-28T17:43:25.741","msg":"initFeedsReporting started"}
+{"lvl":"INF","component":"validator","time":"2025-03-28T19:43:25.742","t":"2025-03-28T17:43:25.742","msg":"feeds reporting initializing..."}
+{"lvl":"INF","component":"validator","source":"coinbase","sourceID":"4","wsMsg":"{\"type\":\"subscribe\",\"product_ids\":[\"USDT-USD\",\"ARB-USD\",\"AVAX-USD\",\"BTC-USD\",\"SWELL-USD\",\"SOL-USD\",\"FIL-USD\",\"DOGE-USD\",\"MATIC-USD\",\"DAI-USD\",\"ETH-USD\",\"DOT-USD\",\"SHIB-USD\",\"LINK-USD\",\"UNI-USD\",\"XRP-USD\",\"LTC-USD\",\"ADA-USD\",\"OP-USD\"],\"channels\":[\"ticker\",\"heartbeat\"]}","t":"2025-03-28T17:43:26.310","msg":"subscribe message"}
+{"lvl":"INF","component":"validator","source":"bybit","sourceID":"17","symbols":["OPUSDT","LTCUSDT","ZRCUSDT","AVAXUSDT","ARBUSDT","LINKUSDT","DOTUSDT","MANTAUSDT","TRXUSDT","SWELLUSDT"],"t":"2025-03-28T17:43:26.554","msg":"preparing subscription request for chunk"}
+{"lvl":"INF","component":"validator","source":"bybit","sourceID":"17","symbols":["SOLUSDT","TONUSDT","FTMUSDT","DAIUSDT","TRUMPUSDT","XRPUSDT","TAIKOUSDT","ADAUSDT","PLUMEUSDT","DOGEUSDT"],"t":"2025-03-28T17:43:26.554","msg":"preparing subscription request for chunk"}
+{"lvl":"INF","component":"validator","source":"bybit","sourceID":"17","symbols":["ETHUSDT","SUSDT","USDCUSDT","BBUSDT","FILUSDT","BTCUSDT","BNBUSDT"],"t":"2025-03-28T17:43:26.554","msg":"preparing subscription request for chunk"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:ADA_USDT","t":"2025-03-28T17:43:26.654","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:XRP_USDT","t":"2025-03-28T17:43:26.654","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:TON_USDT","t":"2025-03-28T17:43:26.654","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:DOGE_USDT","t":"2025-03-28T17:43:26.654","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:BB_USDT","t":"2025-03-28T17:43:26.654","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:BNB_USDT","t":"2025-03-28T17:43:26.654","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:SOL_USDT","t":"2025-03-28T17:43:26.654","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:LTC_USDT","t":"2025-03-28T17:43:26.654","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:TRX_USDT","t":"2025-03-28T17:43:26.654","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:MODE_USDT","t":"2025-03-28T17:43:26.654","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:BTC_USDT","t":"2025-03-28T17:43:26.654","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:TAIKO_USDT","t":"2025-03-28T17:43:26.654","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:SHIB_USDT","t":"2025-03-28T17:43:26.655","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:DOT_USDT","t":"2025-03-28T17:43:26.655","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bitmart","sourceID":"18","topic":"spot/ticker:ETH_USDT","t":"2025-03-28T17:43:26.655","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bybit","sourceID":"17","conn_id":"f87ff096-c6ef-4594-817a-c15c0cc1af4a","t":"2025-03-28T17:43:26.735","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bybit","sourceID":"17","conn_id":"f87ff096-c6ef-4594-817a-c15c0cc1af4a","t":"2025-03-28T17:43:26.737","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"bybit","sourceID":"17","conn_id":"f87ff096-c6ef-4594-817a-c15c0cc1af4a","t":"2025-03-28T17:43:26.737","msg":"subscription successful"}
+{"lvl":"INF","component":"validator","source":"gateio","sourceID":"19","symbols":["\"USDC_USDT\"","\"MANTA_USDT\"","\"ZRC_USDT\"","\"TRUMP_USDT\"","\"SHIB_USDT\"","\"S_USDT\"","\"ETH_USDT\"","\"LTC_USDT\"","\"LINK_USDT\"","\"TRX_USDT\"","\"SOL_USDT\"","\"DOT_USDT\"","\"ARB_USDT\"","\"BTC_USDT\"","\"TON_USDT\"","\"PLUME_USDT\"","\"BNB_USDT\"","\"ADA_USDT\"","\"DOGE_USDT\"","\"XRP_USDT\"","\"DAI_USDT\"","\"SWELL_USDT\"","\"OP_USDT\"","\"SOV_USDT\"","\"FIL_USDT\""],"t":"2025-03-28T17:43:27.234","msg":"subscribing to symbols"}
+{"lvl":"INF","component":"validator","connection":"localnonce","txHash":"0x91162245ec4d22d206434ea94956467272460afb50b1d6460d2d417fc104f8d2","blockNumber":"6778","blockHash":"0x1f691748aabcb8797928d1a6d4f140d3742ad0fe9b7e057fe35a542bae4080b3","gasUsed":5612449,"effectiveGasPrice":"50000007","accepted":true,"sendingDuration":2.186042,"waitingDuration":3002.025833,"t":"2025-03-28T17:43:30.904","msg":"received receipt for transaction"}
+{"lvl":"INF","reporter":"eochain","blockNumber":"6777","aggregatorAddress":"0x5FC8d32690cc91D4c39d9d3abcBD16989F875707","aggregatorReportsCount":1,"blockAppeared":"2025-03-28T17:43:27.895","txHash":"0x91162245ec4d22d206434ea94956467272460afb50b1d6460d2d417fc104f8d2","t":"2025-03-28T17:43:30.904","msg":"quotes reported"}
+{"lvl":"INF","component":"validator","connection":"localnonce","txHash":"0x146940e6a43805d781ba46ad3323ed037ead7c11486335a6dcbb62550c4e5d0f","blockNumber":"6779","blockHash":"0xbb4b7df9a83f8042d8948842eb6d46309f002087dceba48284d72625cb19c5ed","gasUsed":5698033,"effectiveGasPrice":"50000007","accepted":true,"sendingDuration":2.798292,"waitingDuration":2995.488624,"t":"2025-03-28T17:43:33.904","msg":"received receipt for transaction"}
+{"lvl":"INF","reporter":"eochain","blockNumber":"6778","aggregatorAddress":"0x5FC8d32690cc91D4c39d9d3abcBD16989F875707","aggregatorReportsCount":1,"blockAppeared":"2025-03-28T17:43:30.903","txHash":"0x146940e6a43805d781ba46ad3323ed037ead7c11486335a6dcbb62550c4e5d0f","t":"2025-03-28T17:43:33.905","msg":"quotes reported"}
+{"lvl":"INF","component":"validator","connection":"localnonce","txHash":"0x3540297cd201b02891f9a4faeed59e0b4d3e5e9c91af774ad644f434461d47bb","blockNumber":"6780","blockHash":"0x75b72660a0aae20c2d1afbc01a28e792fbefa3fcaac3a43f11b9a69b123a4d61","gasUsed":5695245,"effectiveGasPrice":"50000007","accepted":true,"sendingDuration":2.5475,"waitingDuration":2995.831167,"t":"2025-03-28T17:43:36.906","msg":"received receipt for transaction"}
+{"lvl":"INF","reporter":"eochain","blockNumber":"6779","aggregatorAddress":"0x5FC8d32690cc91D4c39d9d3abcBD16989F875707","aggregatorReportsCount":1,"blockAppeared":"2025-03-28T17:43:33.904","txHash":"0x3540297cd201b02891f9a4faeed59e0b4d3e5e9c91af774ad644f434461d47bb","t":"2025-03-28T17:43:36.906","msg":"quotes reported"}
+```
+
 ### Stop eoracle data validator
 To bring the containers down, run the following command
 ```bash
@@ -197,8 +242,9 @@ docker compose down
 cd Eoracle-operator-setup
 git pull
 ```
-3. Merge .env changes
-Go over .example_env and merge new fields that do not appear in your local .env file
+3. Merge .env changes.
+Go over `.example_env` or `.example_env_holesky` and merge new fields that do not appear in your local `.env` file.
+   - The structure of .example_env_holesky  has been changed to support data validator V2
 
 4. Pull the latest docker images
 ```bash
