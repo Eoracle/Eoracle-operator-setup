@@ -29,9 +29,9 @@ Copy `Eoracle-operator-setup/data-validator/.example_env` into `Eoracle-operator
 Edit the `Eoracle-operator-setup/data-validator/.env` and update the values for your setup
 
 [**NOTE**]
-If you plan to operate eoracle on Holesky, then copy `.example_env_holeksy` instead of `.example_env`.  
+If you plan to operate eoracle on Holesky, then copy `.example_env_holesky` instead of `.example_env`.  
 ```bash
-cp data/validator/.example_env_holeksy data-validaotr/.env`
+cp data/validator/.example_env_holesky data-validator/.env`
 ```
 
 ### Generate a BLS pair (recommended)
